@@ -1,0 +1,358 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "nom": "Doe",
+      "prenom": "John",
+      "nom_utilisateur": "johndoe",
+      "mot_de_passe": "Password123"
+    },
+    {
+      "id": 2,
+      "nom": "Smith",
+      "prenom": "Jane",
+      "nom_utilisateur": "janesmith",
+      "mot_de_passe": "SecurePass456"
+    },
+    {
+      "id": 3,
+      "nom": "Dubois",
+      "prenom": "Marie",
+      "nom_utilisateur": "mariedubois",
+      "mot_de_passe": "MariePass789"
+    },
+    {
+      "id": 4,
+      "nom": "Martin",
+      "prenom": "Lucas",
+      "nom_utilisateur": "lucasmartin",
+      "mot_de_passe": "LucasSecure10"
+    },
+    {
+      "id": 5,
+      "nom": "Bernard",
+      "prenom": "Sophie",
+      "nom_utilisateur": "sophiebernard",
+      "mot_de_passe": "SophiePass2a"
+    },
+    {
+      "id": 6,
+      "nom": "Garcia",
+      "prenom": "Thomas",
+      "nom_utilisateur": "thomasgarcia",
+      "mot_de_passe": "ThomasSecure3b"
+    },
+    {
+      "id": 7,
+      "nom": "Robert",
+      "prenom": "Emma",
+      "nom_utilisateur": "emmarobert",
+      "mot_de_passe": "EmmaPass4c"
+    },
+    {
+      "id": 8,
+      "nom": "Thomas",
+      "prenom": "Hugo",
+      "nom_utilisateur": "hugothomas",
+      "mot_de_passe": "HugoSecure5d"
+    },
+    {
+      "id": 9,
+      "nom": "Beddouch",
+      "prenom": "Yasmine",
+      "nom_utilisateur": "yasminebeddouch",
+      "mot_de_passe": "YasminePass1"
+    },
+    {
+      "id": 10,
+      "nom": "Bégin",
+      "prenom": "Simon",
+      "nom_utilisateur": "simonbegin",
+      "mot_de_passe": "SimonSecure2a"
+    },
+    {
+      "id": 11,
+      "nom": "Chabane",
+      "prenom": "Yanis",
+      "nom_utilisateur": "yanischabane",
+      "mot_de_passe": "YanisPass3b"
+    },
+    {
+      "id": 12,
+      "nom": "Chartier",
+      "prenom": "Jonathan",
+      "nom_utilisateur": "jonathanchartier",
+      "mot_de_passe": "JonathanSecure4c"
+    },
+    {
+      "id": 13,
+      "nom": "Kechad",
+      "prenom": "Myriam",
+      "nom_utilisateur": "myriamkechad",
+      "mot_de_passe": "MyriamPass5d"
+    }
+  ],
+  "clients-id": {
+    "id": 13
+  },
+  "recettes": [
+    {
+      "id": 1,
+      "nom": "Tacos au poulet",
+      "description": "Savoureux tacos au poulet, faciles à préparer pour un dîner mexicain authentique.",
+      "temps_de_cuisson": 30,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Shrimp_tacos_-_El_Dorado_Kitchen_-_Sarah_Stierch.jpg/640px-Shrimp_tacos_-_El_Dorado_Kitchen_-_Sarah_Stierch.jpg",
+      "createur_nom_utilisateur": "system",
+      "categorie": "Dîner",
+      "ingredients": [
+        "500g de filets de poulet",
+        "1 paquet de tortillas de maïs",
+        "1 poivron rouge",
+        "1 oignon",
+        "Épices à tacos",
+        "Salsa",
+        "Crème fraîche"
+      ],
+      "etapes": [
+        "Couper le poulet en dés et le faire revenir à la poêle avec les épices à tacos.",
+        "Émincer l'oignon et le poivron, puis les ajouter au poulet et cuire jusqu'à tendreté.",
+        "Chauffer les tortillas selon les instructions du paquet.",
+        "Garnir les tortillas avec le mélange de poulet, de la salsa et de la crème fraîche."
+      ]
+    },
+    {
+      "id": 2,
+      "nom": "Nachos suprêmes",
+      "description": "Nachos croustillants garnis de fromage fondu, bœuf haché épicé et toutes vos garnitures préférées.",
+      "temps_de_cuisson": 30,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Nachos_with_guacamole.jpg/640px-Nachos_with_guacamole.jpg",
+      "createur_nom_utilisateur": "system",
+      "categorie": "Dîner",
+      "ingredients": [
+        "1 sac de chips tortillas",
+        "300g de bœuf haché",
+        "200g de fromage cheddar râpé",
+        "1 boîte de haricots noirs",
+        "1 avocat",
+        "Crème sure",
+        "Piments jalapeños"
+      ],
+      "etapes": [
+        "Préchauffer le four à 180°C.",
+        "Étaler les chips tortillas sur une plaque de cuisson.",
+        "Faire cuire le bœuf haché à la poêle, puis ajouter les haricots noirs et les épices à votre goût.",
+        "Répartir le bœuf haché sur les chips, puis parsemer de fromage râpé.",
+        "Enfourner jusqu'à ce que le fromage soit fondu et bouillonnant.",
+        "Garnir avec de l'avocat en dés, de la crème sure et des jalapeños."
+      ]
+    },
+    {
+      "id": 3,
+      "nom": "Burger maison",
+      "description": "Savoureux burger maison avec un steak haché juteux, du fromage fondant et des légumes frais, servi dans un pain moelleux.",
+      "temps_de_cuisson": 30,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/%D7%94%D7%9E%D7%91%D7%95%D7%A8%D7%92%D7%A8_%D7%98%D7%91%D7%A2%D7%95%D7%A0%D7%99.jpg/640px-%D7%94%D7%9E%D7%91%D7%95%D7%A8%D7%92%D7%A8_%D7%98%D7%91%D7%A2%D7%95%D7%A0%D7%99.jpg",
+      "createur_nom_utilisateur": "system",
+      "categorie": "Dîner",
+      "ingredients": [
+        "4 pains à burger",
+        "4 steaks hachés",
+        "4 tranches de fromage cheddar",
+        "1 tomate",
+        "1 oignon rouge",
+        "Laitue",
+        "Sauce burger"
+      ],
+      "etapes": [
+        "Faire cuire les steaks hachés à la poêle ou au grill selon la cuisson désirée.",
+        "Pendant la cuisson, couper les pains à burger en deux et les toaster légèrement.",
+        "Garnir la base des pains avec de la laitue, des tranches de tomate et d'oignon rouge.",
+        "Déposer les steaks cuits sur les légumes, ajouter une tranche de fromage sur chaque steak et laisser fondre légèrement.",
+        "Napper de sauce burger et refermer les burgers avec les parties supérieures des pains."
+      ]
+    },
+    {
+      "id": 4,
+      "nom": "Salade César",
+      "description": "Classique salade César avec laitue romaine croquante, croûtons dorés, parmesan et une sauce César crémeuse.",
+      "temps_de_cuisson": 30,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/NY_Pie_-_December_2024_-_Sarah_Stierch_11.jpg/640px-NY_Pie_-_December_2024_-_Sarah_Stierch_11.jpg",
+      "createur_nom_utilisateur": "system",
+      "categorie": "Déjeuner",
+      "ingredients": [
+        "1 laitue romaine",
+        "1 baguette de pain",
+        "50g de parmesan",
+        "Sauce César",
+        "Huile d'olive",
+        "Ail"
+      ],
+      "etapes": [
+        "Laver et essorer la laitue romaine, puis la couper grossièrement.",
+        "Couper la baguette en dés pour faire des croûtons. Les faire dorer à la poêle avec de l'huile d'olive et de l'ail.",
+        "Préparer la sauce César ou utiliser une sauce prête à l'emploi.",
+        "Dans un grand saladier, mélanger la laitue romaine, les croûtons et le parmesan râpé.",
+        "Arroser de sauce César juste avant de servir."
+      ]
+    },
+    {
+      "id": 5,
+      "nom": "Crêpes",
+      "description": "Délicieuses crêpes, parfaites pour le petit-déjeuner, le dessert ou une collation gourmande. Garnitures sucrées ou salées à volonté !",
+      "temps_de_cuisson": 15,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Crep_relleno_de_chocolate.jpg/640px-Crep_relleno_de_chocolate.jpg",
+      "createur_nom_utilisateur": "system",
+      "categorie": "Petit-déjeuner",
+      "ingredients": [
+        "250g de farine",
+        "2 œufs",
+        "500ml de lait",
+        "50g de beurre fondu",
+        "1 pincée de sel",
+        "Sucre (facultatif)"
+      ],
+      "etapes": [
+        "Dans un saladier, mélanger la farine et le sel (et le sucre si vous faites des crêpes sucrées).",
+        "Faire un puits au centre, y casser les œufs et commencer à mélanger au fouet.",
+        "Ajouter progressivement le lait tout en continuant de mélanger pour éviter les grumeaux.",
+        "Incorporer le beurre fondu et mélanger jusqu'à obtenir une pâte lisse.",
+        "Laisser reposer la pâte pendant au moins 30 minutes.",
+        "Faire chauffer une crêpière ou une poêle légèrement huilée.",
+        "Verser une louche de pâte et la répartir finement sur toute la surface.",
+        "Cuire chaque crêpe environ 1 à 2 minutes de chaque côté, jusqu'à ce qu'elle soit dorée.",
+        "Garnir et déguster selon vos envies (chocolat, confiture, caramel, etc.)."
+      ]
+    },
+    {
+      "id": 6,
+      "nom": "Tapas variés",
+      "description": "Un assortiment de tapas pour un apéritif convivial et savoureux, idéal pour partager entre amis ou en famille.",
+      "temps_de_cuisson": 20,
+      "image_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Pinchos_de_tortilla_en_Barcelona.jpg/640px-Pinchos_de_tortilla_en_Barcelona.jpg",
+      "createur_nom_utilisateur": "system",
+      "categorie": "Dîner",
+      "ingredients": [
+        "1 baguette de pain",
+        "100g d'olives",
+        "150g de fromage (Manchego, chèvre, etc.)",
+        "100g de charcuterie (chorizo, jambon cru, etc.)",
+        "Huile d'olive",
+        "Vinaigre balsamique"
+      ],
+      "etapes": [
+        "Couper la baguette en tranches et les toaster légèrement.",
+        "Couper le fromage et la charcuterie en dés ou en tranches fines.",
+        "Préparer un assortiment d'olives.",
+        "Disposer les tranches de pain toasté sur un plat.",
+        "Garnir chaque tranche de pain avec du fromage, de la charcuterie et des olives selon vos envies.",
+        "Arroser d'un filet d'huile d'olive et de vinaigre balsamique avant de servir."
+      ]
+    }
+  ],
+  "stockIngredients": [
+    {
+      "name": "Lait",
+      "quantity": 250,
+      "unit": "ml",
+      "icon": "lait"
+    },
+    {
+      "name": "Patates",
+      "quantity": 4,
+      "unit": "unité",
+      "icon": "patates"
+    },
+    {
+      "name": "Beurre",
+      "quantity": 10,
+      "unit": "g",
+      "icon": "beurre"
+    },
+    {
+      "name": "Farine",
+      "quantity": 30,
+      "unit": "g",
+      "icon": "farine"
+    },
+    {
+      "name": "Steak",
+      "quantity": 4,
+      "unit": "unité",
+      "icon": "steak"
+    },
+    {
+      "name": "Oeuf",
+      "quantity": 5,
+      "unit": "unité",
+      "icon": "oeuf"
+    },
+    {
+      "name": "Tomates",
+      "quantity": 1,
+      "unit": "unité",
+      "icon": "tomates"
+    },
+    {
+      "name": "Carottes",
+      "quantity": 3,
+      "unit": "unité",
+      "icon": "carottes"
+    }
+  ],
+  "groceryList": [
+    {
+      "name": "Lait",
+      "quantity": 250,
+      "unit": "ml",
+      "icon": "lait"
+    },
+    {
+      "name": "Patates",
+      "quantity": 4,
+      "unit": "unité",
+      "icon": "patates"
+    },
+    {
+      "name": "Beurre",
+      "quantity": 10,
+      "unit": "g",
+      "icon": "beurre"
+    },
+    {
+      "name": "Farine",
+      "quantity": 30,
+      "unit": "g",
+      "icon": "farine"
+    },
+    {
+      "name": "Steak",
+      "quantity": 4,
+      "unit": "unité",
+      "icon": "steak"
+    },
+    {
+      "name": "Oeuf",
+      "quantity": 5,
+      "unit": "unité",
+      "icon": "oeuf"
+    },
+    {
+      "name": "Tomates",
+      "quantity": 1,
+      "unit": "unité",
+      "icon": "tomates"
+    },
+    {
+      "name": "Carottes",
+      "quantity": 3,
+      "unit": "unité",
+      "icon": "carottes"
+    },
+    {
+      "name": "Saucisses",
+      "quantity": 2,
+      "unit": "unité",
+      "icon": "saucisses"
+    }
+  ]
+}

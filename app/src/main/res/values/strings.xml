@@ -1,0 +1,95 @@
+<resources>
+    <string name="app_name">Planigo</string>
+    <string name="logo_planificateur_repas">Logo Planificateur de Repas</string>
+    <string name="bon_retour">Bon retour !</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="mot_de_passe">Mot de passe</string>
+    <string name="se_connecter">Se connecter</string>
+    <string name="creer_un_compte">Créer un compte</string>
+    <string name="planigo_tagline">Planigo  : Organisez, cuisinez, économisez !</string>
+    <string name="planigo_tagline_multiline">Planigo  \nOrganisez, cuisinez, économisez !</string>
+
+    <string name="prenom">Prénom :</string>
+    <string name="nom">Nom :</string>
+    <string name="nom_utilisateur">Nom d\'utilisateur :</string>
+    <string name="mot_de_passe_">Mot de passe :</string>
+    <string name="confirmer_mot_de_passe">Confirmer votre mot de passe :</string>
+    <string name="s_inscrire">S\'inscrire</string>
+    <string name="bienvenue_sur_planigo">Bienvenue sur Planigo!</string>
+
+    <string name="page_d_accueil">Page d\'accueil</string>
+    <string name="modifier_mon_stock">Modifier mon stock</string>
+    <string name="recherche_de_recettes">Recherche de recettes</string>
+    <string name="liste_de_mes_recettes">Mes recettes</string>
+    <string name="arrow_icon">Icône flèche</string>
+    <string name="accueil">Accueil</string>
+    <string name="stock">Mon stock</string>
+    <string name="courses">Liste d\'épicerie</string>
+    <string name="recettes">Recettes</string>
+    <string name="profile">Profile</string>
+    <string name="livre_de_recettes">Livre de recettes</string>
+    <string name="rechercher_une_recette">Rechercher une recette</string>
+    <string name="filtres">Filtres :</string>
+    <string name="resultats_de_recherche">Résultats de recherche :</string>
+    <string name="budget_filter">Budget</string>
+    <string name="moins_de_15_min">Moins de 15 min</string>
+    <string name="moins_de_30_min">Moins de 30 min</string>
+    <string name="plus_de_30_min">Plus de 30 min</string>
+    <string name="type_filter">Type</string>
+    <string name="mon_plan_de_semaine">Mon plan de semaine</string>
+    <string name="mes_recettes">Mes Recettes</string>
+    <string name="ma_liste_epicerie">Ma liste d\'épicerie</string>
+    <string name="mon_stock_ingredients">Mon stock d\'ingrédients</string>
+    <string name="edit_profile">edit</string>
+     <string name="back">Retour</string>
+    <string name="a_propos_de_vous">À propos de vous</string>
+    <string name="sauvegarder">Sauvegarder</string>
+    <string name="nom_label">Nom</string>
+    <string name="prenom_label">Prénom</string>
+    <string name="age_label">Âge</string>
+    <string name="genre_label">Genre</string>
+    <string name="confidentialite_label">Confidentialité</string>
+    <string name="settings">Paramètres</string>
+    <string name="ajouter_un_element">Ajouter un élément</string>
+    <string name="editer_un_element">editer un élément</string>
+    <string name="modifier_mon_profile">Modifier mon profil</string>
+    <string name="deconnecter">Déconnecter</string>
+    <string name="voir_la_recette_complete">Voir la recette complète</string>
+    <string name="ajouter_a_ma_liste_de_recette">Ajouter a ma liste de recette</string>
+
+    <string-array name="recipe_categories_filter">
+        <item>Catégorie</item>
+        <item>Petit-déjeuner</item>
+        <item>Déjeuner</item>
+        <item>Dîner</item>
+        <item>Dessert</item>
+        <item>Tous</item>
+    </string-array>
+
+    <string-array name="ingredient_count_filter">
+        <item>Nombre d\'ingrédients</item>
+        <item>Tous</item>
+        <item>Moins de 5</item>
+        <item>5-10</item>
+        <item>Plus de 10</item>
+    </string-array>
+
+    <string name="temps_necessaire">Temps nécessaire</string>
+    <string name="tous">Tous</string>
+
+    <string-array name="time_filter">
+        <item>Tous</item>
+        <item>Moins de 15 min</item>
+        <item>Moins de 30 min</item>
+        <item>Plus de 30 min</item>
+    </string-array>
+
+    <string-array name="price_filter">
+        <item>Prix</item>
+        <item>Tous</item>
+        <item>Bon marché</item>
+        <item>Modéré</item>
+        <item>Cher</item>
+    </string-array>
+
+</resources>
