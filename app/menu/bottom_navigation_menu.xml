@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_accueil"
+        android:icon="@drawable/home"
+    android:title="@string/accueil" />
+
+    <item
+        android:id="@+id/nav_stock"
+        android:icon="@drawable/mon_stock"
+    android:title="@string/stock" />
+
+    <item
+        android:id="@+id/nav_courses"
+        android:icon="@drawable/grocery_cart"
+    android:title="@string/courses" />
+
+    <item
+        android:id="@+id/nav_recettes"
+        android:icon="@drawable/recipe_book"
+    android:title="@string/recettes" />
+
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/usernavigation"
+    android:title="@string/profile" />
+
+</menu>

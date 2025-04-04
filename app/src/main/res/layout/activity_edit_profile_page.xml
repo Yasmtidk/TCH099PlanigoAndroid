@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/light_gray_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="16dp"
+        android:background="@color/principal_color">
+
+        <ImageView
+            android:id="@+id/backButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/go_back"
+            android:contentDescription="@string/back"
+            app:tint="@color/white" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/modifier_mon_profile"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="start"
+            android:layout_marginStart="16dp"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="24dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/gear"
+                    android:contentDescription="@string/edit_profile"
+                    app:tint="@color/principal_color"
+                    android:layout_marginEnd="8dp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/a_propos_de_vous"
+                    android:textSize="18sp"
+                    android:textColor="@color/principal_color"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/editProfileImageView"
+                    android:layout_width="172dp"
+                    android:layout_height="120dp"
+                    android:contentDescription="@string/profile"
+                    android:src="@drawable/userpfp" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/pencil"
+                    android:contentDescription="@string/edit_profile"
+                    app:tint="@color/secondary_color"
+                    android:layout_gravity="bottom|end"
+                     android:layout_marginEnd="8dp"/>
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/white_rounded_background"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/nom"
+                    android:contentDescription="@string/nom"
+                    app:tint="@color/secondary_color"
+                    android:layout_marginEnd="8dp"/>
+
+                <TextView
+                    android:id="@+id/nomTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Doe"
+                    android:textSize="16sp"
+                    android:textColor="@color/black_text"/>
+
+                <ImageView
+                    android:id="@+id/editNomButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/pencil"
+                    android:contentDescription="@string/edit_profile"
+                    app:tint="@color/secondary_color"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/white_rounded_background"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/nom"
+                    android:contentDescription="@string/prenom"
+                    app:tint="@color/secondary_color"
+                    android:layout_marginEnd="8dp"/>
+
+                <TextView
+                    android:id="@+id/prenomTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="John"
+                    android:textSize="16sp"
+                    android:textColor="@color/black_text"/>
+
+                <ImageView
+                    android:id="@+id/editPrenomButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/pencil"
+                    android:contentDescription="@string/edit_profile"
+                    app:tint="@color/secondary_color"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/white_rounded_background"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/age"
+                    android:contentDescription="@string/age_label"
+                    app:tint="@color/secondary_color"
+                    android:layout_marginEnd="8dp"/>
+
+                <TextView
+                    android:id="@+id/ageTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="28"
+                    android:textSize="16sp"
+                    android:textColor="@color/black_text"/>
+
+                <ImageView
+                    android:id="@+id/editAgeButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/pencil"
+                    android:contentDescription="@string/edit_profile"
+                    app:tint="@color/secondary_color"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/white_rounded_background"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/gender"
+                    android:contentDescription="@string/genre_label"
+                    app:tint="@color/secondary_color"
+                    android:layout_marginEnd="8dp"/>
+
+                <TextView
+                    android:id="@+id/genreTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Male"
+                    android:textSize="16sp"
+                    android:textColor="@color/black_text"/>
+
+                <ImageView
+                    android:id="@+id/editGenreButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/pencil"
+                    android:contentDescription="@string/edit_profile"
+                    app:tint="@color/secondary_color"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?android:attr/selectableItemBackground"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/white_rounded_background"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="@string/confidentialite_label"
+                    android:src="@drawable/privacyyuser"
+                    app:tint="@color/secondary_color" />
+
+                <TextView
+                    android:id="@+id/confidentialiteTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Public"
+                    android:textColor="@color/black_text"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/editConfidentialiteButton"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:contentDescription="@string/edit_profile"
+                    android:focusable="true"
+                    android:src="@drawable/pencil"
+                    app:tint="@color/secondary_color" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/secondary_color"
+                android:text="@string/sauvegarder"
+                android:textColor="@color/white"
+                android:layout_marginBottom="32dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/principal_color"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/bottom_navigation_menu" />
+
+</LinearLayout>
