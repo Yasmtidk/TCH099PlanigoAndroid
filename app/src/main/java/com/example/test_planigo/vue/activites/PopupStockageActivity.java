@@ -23,6 +23,7 @@ import com.example.test_planigo.R;
 import com.example.test_planigo.VueModele.StockageViewModel;
 import com.example.test_planigo.modeles.entitees.Ingredient;
 import com.example.test_planigo.modeles.entitees.Produit;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -125,8 +126,8 @@ public class PopupStockageActivity extends AppCompatActivity {
         //Afficher l'erreur ou retourner à la page précédanteModifier selon le succès à sauvegarder les modifications
         stockageViewModel.getResultatErreurAPILiveData().observe(this, reponse -> {
             if (reponse instanceof Boolean) {
-                Boolean deleteReussie = (Boolean) reponse;
-                if (deleteReussie) {
+                Boolean ajoutReussi = (Boolean) reponse;
+                if (ajoutReussi) {
                     //modifier la zone de succès
                     msgErreur.setText("");
                     Toast.makeText(this, "Modification sauvegarder", Toast.LENGTH_LONG).show();
@@ -147,23 +148,25 @@ public class PopupStockageActivity extends AppCompatActivity {
         btnOk.setOnClickListener(v -> {
 
             double quantiteRecupere = Double.parseDouble(txtQuantite.getText().toString());
+            if (quantiteRecupere <= 0) {
+                msgErreur.setText("La quantite n'est pas valide");
+                return;
+            }
+
             if(action.equals("Edit")){
                 if(intent.getDoubleExtra("QUANTITE", 0) == quantiteRecupere){
                     finish();
-                } else if (quantiteRecupere <= 0) {
-                    msgErreur.setText("La quantite n'est pas valide");
-                    return;
                 }
                 //lancer la requête de modification de l'objet sur la base de donné
                 Produit produit = new Produit(composantListeIngredient.getText().toString(), quantiteRecupere, txtUniteMesure.getText().toString());
                 stockageViewModel.updateProduit(produit);
             } else if (action.equals("ADD")) {
 
-                Ingredient nouveau = new Ingredient(composantListeIngredient.getText().toString(), txtUniteMesure.getText().toString());
+                //vérifier que l'ingrédient est dans la liste avant d'essayer de l'ajouter
+                Ingredient nouveau = new Ingredient(composantListeIngredient.getText().toString().trim(), txtUniteMesure.getText().toString());
                 if(listeIngredient.contains(nouveau)){
                     Produit nouveauProduit = new Produit(nouveau.getName(), Double.parseDouble(txtQuantite.getText().toString()), nouveau.getUniteMesure());
                     stockageViewModel.ajouterProduit(nouveauProduit);
-                    finish();
                 }else{
                     msgErreur.setText("Le nom de l'ingrédient et/ou l'unité n'est pas valide.");
                 }
