@@ -48,6 +48,7 @@ public class MonStockIngredientsActivity extends AppCompatActivity {
         );
 
 
+        //Créer les produits de la liste lorsque la liste des produit change
         stockageViewModel.getListeProduit().observe(this, produits -> {
            if(produits != null){
                msgErreur.setText("");
@@ -57,6 +58,7 @@ public class MonStockIngredientsActivity extends AppCompatActivity {
                msgErreur.setText("Erreur lors du chargement des items");
            }
         });
+
 
         //Modifier selon le succès de la requête lors de chaque modification avec l'API
         stockageViewModel.getResultatErreurAPILiveData().observe(this, reponse -> {
@@ -73,6 +75,7 @@ public class MonStockIngredientsActivity extends AppCompatActivity {
             }
         });
 
+
         //Lorsqu'un item veut être modifier par l'utilisateur
         stockageViewModel.getAllerPopupProduit().observe(this, reponse ->{
             Intent allerPopupStockage = new Intent(MonStockIngredientsActivity.this, PopupStockageActivity.class);
@@ -83,6 +86,7 @@ public class MonStockIngredientsActivity extends AppCompatActivity {
             launcher.launch(allerPopupStockage);
         });
 
+
         //Lorsqu'on click sur l'Ajout d'un produit
         ajouterItem.setOnClickListener(view -> {
             Intent allerPopupStockage = new Intent(MonStockIngredientsActivity.this, PopupStockageActivity.class);
@@ -91,20 +95,6 @@ public class MonStockIngredientsActivity extends AppCompatActivity {
         });
 
 
-/*
-        //Observer les comptes et déléguer à l'adapter la gestion des items
-        stockageViewModel.getDernierResultat().getComptes().observe(this, comptes -> {
-            if (comptes != null) {
-                ComptesAdapter adapter = new ComptesAdapter(this, R.layout.compte_layout, comptes, compteViewModel);
-                lvComptes.setAdapter(adapter);
-            } else {
-                Toast.makeText(this, "Erreur de chargement des comptes", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        StockIngredientAdapter adapter = new StockIngredientAdapter(this, stockIngredientsList);
-        stockIngredientsListView.setAdapter(adapter);
-*/
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();

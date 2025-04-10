@@ -68,7 +68,10 @@ public class StockageRepository {
 
     /*Exécuter les routes*/
 
-    /**Récupérer tout les produits dans le stockage du client connecter et initialiser la liste local*/
+    /**Récupérer tout les produits dans le stockage du client connecter et initialiser la liste local
+     * En cas de succès: listeProduit est modifier par la liste des produit récupéré
+     * En cas d'echec: resultatErreurAPILiveData est modifer par un string coorespondant au message d'erreur
+     */
     public void chargerListeProduit(){
         (new Thread(){
             public void run(){
@@ -116,6 +119,8 @@ public class StockageRepository {
 
     /**
      * Récupérer tout les produits dans le stockage du client connecter et initialiser la liste local
+     * En cas de succès: listeIngredient est modifier par la liste des ingrédients récupéré
+     * En cas d'echec: resultatErreurAPILiveData est modifer par un string coorespondant au message d'erreur
      */
     public void chargerListeIngredient(){
         (new Thread(){
@@ -157,7 +162,10 @@ public class StockageRepository {
     }
 
     /** Supprimer le produit donné en paramètre du stockage du client actuel dans la base de donné
-     * @param produit L'objet Produit à supprimer de la base de donné*/
+     * @param produit L'objet Produit à supprimer de la base de donné
+     * En cas de succès: resultatErreurAPILiveData renvoie true
+     * En cas d'echec: resultatErreurAPILiveData est modifer par un string coorespondant au message d'erreur
+     */
     public void deleteProduit(Produit produit){
         (new Thread(){
             public void run(){
@@ -204,6 +212,8 @@ public class StockageRepository {
 
     /** Ajouter le produit donné en paramètre aux stockage du client actuel
      * @param produit L'objet produit à ajouter dans la base de donné
+     * En cas de succès: resultatErreurAPILiveData renvoie true
+     * En cas d'echec: resultatErreurAPILiveData est modifer par un string coorespondant au message d'erreur
      */
     public void ajouterProduit(Produit produit){
         (new Thread(){
@@ -229,12 +239,12 @@ public class StockageRepository {
                     }else if(statutRequete.equals("success")){
 
                         /*Maintenant qu'on a l'id du produit, l'ajouter aux stockage du client actuel*/
-
+                        Log.d("DEBUG_TAG", "passage dans ajouterProduit voici l'id : ");
                         //préparer l'objet (information nécessaire pour la route)
                         JSONObject postObj = new JSONObject();
                         postObj.put("identifiant", ClientActuel.getClientConnecter().getNom_utilisateur());
                         postObj.put("motDePasse", ClientActuel.getClientConnecter().getMot_de_passe());
-                        postObj.put("idProduit", produit.getName());
+                        postObj.put("idProduit", new JSONObject(stringResponce).getString("idProduit"));
                         postObj.put("quantite", produit.getQuantity());
                         RequestBody corpsPostRequete = RequestBody.create(postObj.toString(), JSON);
 
@@ -268,6 +278,12 @@ public class StockageRepository {
         }).start();
     }
 
+    /**
+     * Modifier le produit donnée en paramètre dans la base de donné
+     * @param produit Le produit modifier (le nom doit déjà exister)
+     * En cas de succès: resultatErreurAPILiveData renvoie true
+     * En cas d'echec: resultatErreurAPILiveData est modifer par un string coorespondant au message d'erreur
+     */
     public void modifierProduit(Produit produit){
         (new Thread(){
             public void run(){

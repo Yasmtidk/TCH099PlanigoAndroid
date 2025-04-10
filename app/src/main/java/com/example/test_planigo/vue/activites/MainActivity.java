@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Connexion réussie !", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, AccueilActivity.class);
                 startActivity(intent);
-                //finish();
 
             } else if (reponseConnexion instanceof String) {
                 String messageErreur = (String) reponseConnexion;
