@@ -44,7 +44,7 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
         backButtonRecipeDetail = findViewById(R.id.backButtonRecipeDetail);
         recipeDetailImageView = findViewById(R.id.recipeDetailImageView);
         recipeNameDetailTextView = findViewById(R.id.recipeNameDetailTextView);
-        recipeTimeTextView = findViewById(R.id.recipeTimeTextView);
+        recipeTimeTextView = findViewById(R.id.recetteListeType);
         recipeDifficultyTextView = findViewById(R.id.recipeDifficultyTextView);
         recipePortionTextView = findViewById(R.id.recipePortionTextView);
         ingredientsTitleTextView = findViewById(R.id.ingredientsTitleTextView);
@@ -120,7 +120,7 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
         recipeDifficultyTextView.setText("Facile");
         recipePortionTextView.setText("3 portions");
         Picasso.get()
-                .load(recipe.getImage_url())
+                .load(recipe.getImage())
                 .placeholder(R.drawable.planigologo)
                 .error(R.drawable.planigologo)
                 .into(recipeDetailImageView);
