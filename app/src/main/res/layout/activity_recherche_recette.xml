@@ -79,7 +79,7 @@
                 android:layout_marginEnd="8dp"/>
 
             <Spinner
-                android:id="@+id/filterCategorySpinner"
+                android:id="@+id/filterTypeSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:entries="@array/recipe_categories_filter"
@@ -87,7 +87,7 @@
                 android:spinnerMode="dropdown" />
 
             <Spinner
-                android:id="@+id/filterIngredientsSpinner"
+                android:id="@+id/filterRestrictionSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:entries="@array/ingredient_count_filter"
@@ -96,14 +96,6 @@
                 android:layout_marginStart="8dp"/>
 
 
-            <Spinner
-                android:id="@+id/filterPriceSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/price_filter"
-                android:minWidth="80dp"
-                android:spinnerMode="dropdown"
-                android:layout_marginStart="8dp"/>
         </LinearLayout>
 
         <TextView

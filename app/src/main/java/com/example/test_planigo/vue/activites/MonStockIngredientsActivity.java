@@ -41,6 +41,7 @@ public class MonStockIngredientsActivity extends AppCompatActivity {
         //Récupéré les produits et garnir la liste view
         stockageViewModel = new ViewModelProvider(this).get(StockageViewModel.class);
         stockageViewModel.chargerListeProduit();
+        //Recharger la liste des produit au retour d'une activité
         launcher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(), result -> {
                     stockageViewModel.chargerListeProduit();

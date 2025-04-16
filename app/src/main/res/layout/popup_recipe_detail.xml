@@ -70,7 +70,7 @@
                     app:tint="@color/secondary_color" />
 
                 <TextView
-                    android:id="@+id/recipeTimeTextView"
+                    android:id="@+id/recetteListeType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10 minutes"
