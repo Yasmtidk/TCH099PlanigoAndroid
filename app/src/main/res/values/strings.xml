@@ -64,27 +64,33 @@
     <string name="ajouter_a_ma_liste_de_recette">Ajouter a ma liste de recette</string>
 
     <string-array name="recipe_categories_filter">
-        <item>Catégorie</item>
-        <item>Petit-déjeuner</item>
+        <item>tout</item>
         <item>Déjeuner</item>
         <item>Dîner</item>
+        <item>Souper</item>
+        <item>Collation</item>
+        <item>Apéritif</item>
+        <item>Entrée</item>
+        <item>Plat principal</item>
         <item>Dessert</item>
-        <item>Tous</item>
     </string-array>
 
     <string-array name="ingredient_count_filter">
-        <item>Nombre d\'ingrédients</item>
-        <item>Tous</item>
-        <item>Moins de 5</item>
-        <item>5-10</item>
-        <item>Plus de 10</item>
+        <item>tout</item>
+        <item>miennes</item>
+        <item>sauvegarder</item>
+        <item>Végétarien</item>
+        <item>Végan</item>
+        <item>Sans gluten</item>
+        <item>Sans lactose</item>
+        <item>Pescatarien</item>
     </string-array>
 
     <string name="temps_necessaire">Temps nécessaire</string>
-    <string name="tous">Tous</string>
+    <string name="tous">tout</string>
 
     <string-array name="time_filter">
-        <item>Tous</item>
+        <item>tout</item>
         <item>Moins de 15 min</item>
         <item>Moins de 30 min</item>
         <item>Plus de 30 min</item>
@@ -92,7 +98,7 @@
 
     <string-array name="price_filter">
         <item>Prix</item>
-        <item>Tous</item>
+        <item>tous</item>
         <item>Bon marché</item>
         <item>Modéré</item>
         <item>Cher</item>
