@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.test_planigo.VueModele.RecetteViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.test_planigo.R;
 import com.example.test_planigo.VueModele.PlanigoViewModel;
@@ -30,7 +31,7 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
     private LinearLayout ingredientsListContainer, etapesListContainer;
     private Button ajouterListeRecetteButton;
     private BottomNavigationView bottomNavigationView;
-    private PlanigoViewModel viewModel;
+    private RecetteViewModel viewModel;
 
     private Recette recipe;
 
@@ -39,7 +40,7 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.popup_recipe_detail);
 
-        viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(PlanigoViewModel.class);
+        viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(RecetteViewModel.class);
 
         backButtonRecipeDetail = findViewById(R.id.backButtonRecipeDetail);
         recipeDetailImageView = findViewById(R.id.recipeDetailImageView);
@@ -59,8 +60,12 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
 
         bottomNavigationView.setSelectedItemId(R.id.nav_recettes);
 
-        int recipeId = getIntent().getIntExtra("recipe_id", -1);
+        int recipeId = getIntent().getIntExtra("ID", -1);
         if (recipeId != -1) {
+
+            viewModel.setRecetteActuel(recipeId);
+
+            /*
             viewModel.getRecettes().observe(this, recettes -> {
                 if (recettes != null) {
                     for (Recette r : recettes) {
@@ -76,12 +81,17 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
                     Toast.makeText(this, "Error loading!", Toast.LENGTH_SHORT).show();
                     finish();
                 }
-            });
+            });*/
         } else {
             Toast.makeText(this, "Recipe ID not found!", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
+
+        //Initialiser les composants selon la recette complète actuel
+        viewModel.getRecetteCompleteActuel().observe(this, recette ->{
+
+        });
 
 
         bottomNavigationView.setOnItemSelectedListener(item -> {

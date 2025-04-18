@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -64,6 +65,7 @@ public class RechercheRecetteActivity extends AppCompatActivity {
         recetteAdapter = new RecetteAdapter(Arrays.asList(), itemListe ->{
             Intent intent = new Intent(this, RecipeDetailPageActivity.class);
             intent.putExtra("ID", itemListe.getId());
+            Log.d("DEBUG_TAG", "id envoyer : " + itemListe.getId());
             startActivity(intent);
         });
         recipesRecyclerView.setAdapter(recetteAdapter);
@@ -128,8 +130,8 @@ public class RechercheRecetteActivity extends AppCompatActivity {
                 List<RecetteAbrege> recettes = recetteAbregesLocal.stream()
                         .filter(recette -> recette.getNom().toLowerCase().contains(searchRecipeEditText.getText().toString().toLowerCase()))
                         .collect(Collectors.toList());
-                recetteAdapter.setData(recetteAbregesLocal);
-                resultatsDeRechercheTextView.setText(getString(R.string.resultats_de_recherche) + " (" + recetteAbregesLocal.size() + ")");
+                recetteAdapter.setData(recettes);
+                resultatsDeRechercheTextView.setText(getString(R.string.resultats_de_recherche) + " (" + recettes.size() + ")");
             }
             @Override
             public void afterTextChanged(Editable s) {
