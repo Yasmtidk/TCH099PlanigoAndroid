@@ -6,34 +6,40 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test_planigo.VueModele.RecetteViewModel;
+import com.example.test_planigo.modeles.entitees.Produit;
+import com.example.test_planigo.vue.adaptateurs.ItemIngredientAdapter;
+import com.example.test_planigo.vue.adaptateurs.ItemUniqueAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.test_planigo.R;
 import com.example.test_planigo.VueModele.PlanigoViewModel;
 import com.example.test_planigo.modeles.entitees.Recette;
 import com.squareup.picasso.Picasso;
 
+import java.util.Arrays;
 import java.util.List;
 
 
 public class RecipeDetailPageActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private ImageView backButtonRecipeDetail, recipeDetailImageView;
-    private TextView recipeNameDetailTextView, recipeTimeTextView, recipeDifficultyTextView, recipePortionTextView;
-    private TextView ingredientsTitleTextView, etapesTitleTextView;
-    private LinearLayout ingredientsListContainer, etapesListContainer;
-    private Button ajouterListeRecetteButton;
+    private ImageView imageRecette;
+    private TextView recipeNameDetailTextView, recipeTimeTextView, recipeDifficultyTextView, recipePortionTextView, recipeTypeTextView, createurRecetteTextView, descriptionRecetteTextView;
+    private RecyclerView listeRestrictions, listeIngredients, listeEtapes;
     private BottomNavigationView bottomNavigationView;
     private RecetteViewModel viewModel;
+    private ItemUniqueAdapter restrictionsAdapter, etapeAdapter;
+    private ItemIngredientAdapter itemProduitAdapter;
 
-    private Recette recipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,54 +48,58 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
 
         viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(RecetteViewModel.class);
 
-        backButtonRecipeDetail = findViewById(R.id.backButtonRecipeDetail);
-        recipeDetailImageView = findViewById(R.id.recipeDetailImageView);
+        /*imageRecette;
+    private TextView recipeNameDetailTextView, recipeTimeTextView, recipeDifficultyTextView, recipePortionTextView, recipeTypeTextView, createurRecetteTextView, descriptionRecetteTextView;
+    private ListView listeRestrictions, listeIngredients, listeEtapes;*/
+
+        //Créer les composants
+        imageRecette = findViewById(R.id.recipeDetailImageView);
         recipeNameDetailTextView = findViewById(R.id.recipeNameDetailTextView);
-        recipeTimeTextView = findViewById(R.id.recetteListeType);
+        recipeTimeTextView = findViewById(R.id.recipeTimeTextView);
         recipeDifficultyTextView = findViewById(R.id.recipeDifficultyTextView);
         recipePortionTextView = findViewById(R.id.recipePortionTextView);
-        ingredientsTitleTextView = findViewById(R.id.ingredientsTitleTextView);
-        etapesTitleTextView = findViewById(R.id.etapesTitleTextView);
-        ingredientsListContainer = findViewById(R.id.ingredientsListContainer);
-        etapesListContainer = findViewById(R.id.etapesListContainer);
-        ajouterListeRecetteButton = findViewById(R.id.ajouterListeRecetteButton);
+        recipeTypeTextView = findViewById(R.id.recipeTypeTextView);
+        createurRecetteTextView = findViewById(R.id.recipeCreatorTextView);
+        listeRestrictions = findViewById(R.id.listeRestrictionRecette);
+        descriptionRecetteTextView = findViewById(R.id.descriptionRecette);
+        listeIngredients = findViewById(R.id.ingredientsListContainer);
+        listeEtapes = findViewById(R.id.etapesListContainer);
+
+        listeRestrictions.setLayoutManager(new LinearLayoutManager(this));
+        listeIngredients.setLayoutManager(new LinearLayoutManager(this));
+        listeEtapes.setLayoutManager(new LinearLayoutManager(this));
+
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-
-        backButtonRecipeDetail.setOnClickListener(this);
-        ajouterListeRecetteButton.setOnClickListener(this);
-
         bottomNavigationView.setSelectedItemId(R.id.nav_recettes);
 
+        //lancer la requete de récupération de la recette si on trouve l'id, sinon on termine l'activité
         int recipeId = getIntent().getIntExtra("ID", -1);
         if (recipeId != -1) {
-
             viewModel.setRecetteActuel(recipeId);
-
-            /*
-            viewModel.getRecettes().observe(this, recettes -> {
-                if (recettes != null) {
-                    for (Recette r : recettes) {
-                        if (r.getId() == recipeId) {
-                            recipe = r;
-                            populateRecipeDetails(recipe);
-                            return;
-                        }
-                    }
-                    Toast.makeText(this, "Recipe not found!", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    Toast.makeText(this, "Error loading!", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-            });*/
         } else {
             Toast.makeText(this, "Recipe ID not found!", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
 
-        //Initialiser les composants selon la recette complète actuel
+        //Remplir les composants selon la recette complète actuel
         viewModel.getRecetteCompleteActuel().observe(this, recette ->{
+
+            recipeNameDetailTextView.setText(recette.getNom());
+            recipeTimeTextView.setText(recette.getTemps_de_cuisson() + " minutes");
+            recipeDifficultyTextView.setText(recette.getDifficulter());
+            recipePortionTextView.setText(recette.getPortions());
+            recipeTypeTextView.setText(recette.getType());
+            createurRecetteTextView.setText(recette.getCreateur_nom_utilisateur());
+            descriptionRecetteTextView.setText(recette.getDescription());
+
+            restrictionsAdapter = new ItemUniqueAdapter(Arrays.asList(recette.getRestrictions()));
+            etapeAdapter = new ItemUniqueAdapter(Arrays.asList(recette.getEtapes()));
+            itemProduitAdapter = new ItemIngredientAdapter(Arrays.asList(recette.getIngredients()));
+
+            listeRestrictions.setAdapter(restrictionsAdapter);
+            listeEtapes.setAdapter(etapeAdapter);
+            listeIngredients.setAdapter(itemProduitAdapter);
 
         });
 
@@ -124,7 +134,7 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
         });
     }
 
-    private void populateRecipeDetails(Recette recipe) {
+    /*private void populateRecipeDetails(Recette recipe) {
         recipeNameDetailTextView.setText(recipe.getNom());
         recipeTimeTextView.setText(recipe.getTemps_de_cuisson() + " minutes");
         recipeDifficultyTextView.setText("Facile");
@@ -158,7 +168,7 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
             etapesListContainer.addView(stepTextView);
             stepNumber++;
         }
-    }
+    }*/
 
     @Override
     public void onClick(View v) {
@@ -166,9 +176,9 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
         if (id == R.id.backButtonRecipeDetail) {
             finish();
 
-        }  if (id == R.id.ajouterListeRecetteButton) {
+        }/*  if (id == R.id.ajouterListeRecetteButton) {
              Toast.makeText(this, "TODO smt!", Toast.LENGTH_SHORT).show();
-        }
+        }*/
     }
 
 

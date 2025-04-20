@@ -137,7 +137,7 @@ public class RecetteRepository {
 
                         //Update la recette complète actuel
                         ObjectMapper mapper = new ObjectMapper();
-                        JSONArray recetteComplete = new JSONObject(stringResponce).getJSONArray("recetteComplete");
+                        JSONObject recetteComplete = new JSONObject(stringResponce).getJSONObject("recetteComplete");
                         RecetteComplete listeRecetteAbregeRequete = mapper.readValue(recetteComplete.toString(), RecetteComplete.class);
                         recetteCompleteActuel.postValue(listeRecetteAbregeRequete);
                     }

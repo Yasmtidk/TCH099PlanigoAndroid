@@ -18,6 +18,14 @@
         android:paddingBottom="32dp"
         tools:context=".SignupActivity">
 
+        <TextView
+            android:id="@+id/msgErreurSigup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/erreur"
+            android:padding="8dp"
+            android:visibility="gone"/>
+
         <ImageView
             android:id="@+id/iv_logo_signup"
             android:layout_width="90dp"
@@ -46,7 +54,7 @@
             android:layout_marginBottom="12dp"
             android:hint="@string/prenom"
             app:boxBackgroundColor="#FFFFFF"
-             app:boxStrokeColor="#80000000"
+            app:boxStrokeColor="#80000000"
             app:hintTextColor="#80000000"
             >
 
@@ -67,7 +75,7 @@
             android:layout_marginBottom="12dp"
             android:hint="@string/nom"
             app:boxBackgroundColor="#FFFFFF"
-             app:boxStrokeColor="#80000000"
+            app:boxStrokeColor="#80000000"
             app:hintTextColor="#80000000"
             >
 
@@ -88,7 +96,7 @@
             android:layout_marginBottom="12dp"
             android:hint="@string/nom_utilisateur"
             app:boxBackgroundColor="#FFFFFF"
-             app:boxStrokeColor="#80000000"
+            app:boxStrokeColor="#80000000"
             app:hintTextColor="#80000000"
             >
 
@@ -109,7 +117,7 @@
             android:layout_marginBottom="12dp"
             android:hint="@string/mot_de_passe_"
             app:boxBackgroundColor="#FFFFFF"
-             app:boxStrokeColor="#80000000"
+            app:boxStrokeColor="#80000000"
             app:hintTextColor="#80000000"
             app:passwordToggleEnabled="true"
             >
@@ -131,7 +139,7 @@
             android:layout_marginBottom="20dp"
             android:hint="@string/confirmer_mot_de_passe"
             app:boxBackgroundColor="#FFFFFF"
-             app:boxStrokeColor="#80000000"
+            app:boxStrokeColor="#80000000"
             app:hintTextColor="#80000000"
             app:passwordToggleEnabled="true"
             >
@@ -174,16 +182,5 @@
             android:textSize="14sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/msgErreurSigup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@color/erreur"
-            android:paddingVertical="12dp"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
     </LinearLayout>
-
 </ScrollView>
