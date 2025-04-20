@@ -70,7 +70,7 @@
                     app:tint="@color/secondary_color" />
 
                 <TextView
-                    android:id="@+id/recetteListeType"
+                    android:id="@+id/recipeTimeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10 minutes"
@@ -125,6 +125,111 @@
             </LinearLayout>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:layout_marginTop="8dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/planigologo"
+                    android:contentDescription="Category Icon"
+                    app:tint="@color/secondary_color" />
+
+                <TextView
+                    android:id="@+id/recipeTypeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Breakfast"
+                    android:textColor="@color/black_text"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Type"
+                    android:textColor="@color/hint_text_color"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/planigologo"
+                    android:contentDescription="Creator Icon"
+                    app:tint="@color/secondary_color" />
+
+                <TextView
+                    android:id="@+id/recipeCreatorTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="System"
+                    android:textColor="@color/black_text"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Createur"
+                    android:textColor="@color/hint_text_color"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/recipeRestrictionIcon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/planigologo"
+                    android:contentDescription="Restriction Icon"
+                    app:tint="@color/secondary_color" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/listeRestrictionRecette"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Restrictions"
+                    android:textColor="@color/hint_text_color"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/descriptionRecette"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hint_text_color"
+            android:textSize="14sp"/>
+
         <TextView
             android:id="@+id/ingredientsTitleTextView"
             android:layout_width="match_parent"
@@ -133,23 +238,20 @@
             android:gravity="center"
             android:paddingVertical="12dp"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
             android:text="Ingrédients"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ingredientsListContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="16dp"/>
 
-            <include layout="@layout/list_item_recipe_detail" />
-            <include layout="@layout/list_item_recipe_detail" />
-            <include layout="@layout/list_item_recipe_detail" />
 
-        </LinearLayout>
 
         <TextView
             android:id="@+id/etapesTitleTextView"
@@ -159,40 +261,25 @@
             android:gravity="center"
             android:paddingVertical="12dp"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
             android:text="Étapes"
             android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/etapesListContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="16dp"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Step 1: Do something..."
-                android:textColor="@color/black_text"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Step 2: Do another thing..."
-                android:textColor="@color/black_text"
-                android:textSize="16sp"
-                android:layout_marginBottom="8dp"/>
-
-        </LinearLayout>
-
-         <Button
+        <Button
             android:id="@+id/ajouterListeRecetteButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/secondary_color"
             android:text="@string/ajouter_a_ma_liste_de_recette"

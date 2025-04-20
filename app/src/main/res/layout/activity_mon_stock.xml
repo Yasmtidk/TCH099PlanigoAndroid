@@ -35,6 +35,14 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/msgErreurMonStock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:textColor="@color/erreur"
+        android:visibility="gone" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -55,17 +63,6 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="16dp"/>
 
-
-            <TextView
-                android:id="@+id/msgErreurMonStock"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text=""
-                android:textColor="@color/erreur"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
             <ListView
                 android:id="@+id/stockIngredientsListView"
                 android:layout_width="match_parent"
@@ -75,7 +72,7 @@
                 android:nestedScrollingEnabled="false"/>
 
             <LinearLayout
-                android:id="@+id/ajouter_element_stock_card"
+                android:id="@+id/ajouterItemMonStockage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -94,7 +91,6 @@
                     android:layout_marginEnd="8dp"/>
 
                 <TextView
-                    android:id="@+id/ajouterItemMonStockage"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"

@@ -1,5 +1,6 @@
 package com.example.test_planigo.modeles.entitees;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
@@ -7,7 +8,8 @@ import java.util.Objects;
 public class Produit {
     @JsonProperty("nom")
     private String name;
-    @JsonProperty("quantite_disponible")
+
+    @JsonAlias({"quantite_disponible", "quantite"})
     private double quantity;
     @JsonProperty("unite_de_mesure")
     private String unit;
