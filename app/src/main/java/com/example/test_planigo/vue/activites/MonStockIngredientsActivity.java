@@ -2,9 +2,12 @@ package com.example.test_planigo.vue.activites;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -22,7 +25,7 @@ public class MonStockIngredientsActivity extends AppCompatActivity {
     private ListView stockIngredientsListView;
     private StockageViewModel stockageViewModel;
     private TextView msgErreur;
-    private TextView ajouterItem;
+    private LinearLayout ajouterItem;
     private ActivityResultLauncher<Intent> launcher;
 
     @Override
@@ -34,6 +37,11 @@ public class MonStockIngredientsActivity extends AppCompatActivity {
         stockIngredientsListView = findViewById(R.id.stockIngredientsListView);
         msgErreur = findViewById(R.id.msgErreurMonStock);
         ajouterItem = findViewById(R.id.ajouterItemMonStockage);
+
+        if (ajouterItem == null) {
+            Log.e("MonStockActivity", "Could not find view with ID ajouterItemMonStockage");
+            return;
+        }
 
         bottomNavigationView.setSelectedItemId(R.id.nav_stock);
 

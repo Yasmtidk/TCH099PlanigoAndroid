@@ -4,9 +4,13 @@ import static android.text.InputType.TYPE_CLASS_NUMBER;
 import static android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL;
 import static android.text.InputType.TYPE_NUMBER_FLAG_SIGNED;
 
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.textfield.TextInputEditText;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,7 +41,7 @@ public class PopupStockageActivity extends AppCompatActivity {
 
     private AutoCompleteTextView composantListeIngredient;
     private EditText txtQuantite;
-    private TextView txtUniteMesure;
+    private TextInputEditText txtUniteMesureEditText;
     private Button btnAnnuler;
     private Button btnOk;
 
@@ -50,21 +54,23 @@ public class PopupStockageActivity extends AppCompatActivity {
 
         //récupérer les composants
         txtQuantite = findViewById(R.id.quantityEditText);
-        txtUniteMesure = findViewById(R.id.uniteMesureTextView);
+        txtUniteMesureEditText = findViewById(R.id.uniteMesureEditText);
         composantListeIngredient = (AutoCompleteTextView) findViewById(R.id.listeIngredientAutoComplete);
         msgErreur = findViewById(R.id.msgErreurPopupStockage);
         btnAnnuler = findViewById(R.id.buttonCancel);
         btnOk = findViewById(R.id.buttonOk);
+        MaterialToolbar toolbar = findViewById(R.id.popup_toolbar);
 
         //initialiser les composants selon le type d'Action voulu
         Intent intent = getIntent();
         action = intent.getStringExtra("ACTION");
 
         if(action.equals("ADD")){
-            txtUniteMesure.setText("Selon l'ingredient");
+            txtUniteMesureEditText.setText("Selon l'ingredient");
+            toolbar.setTitle(R.string.ajouter_un_element);
 
         } else if (action.equals("Edit")) {
-
+            toolbar.setTitle(R.string.editer_un_element);
             //Récuprérer les informations supplémentaires
             String ingredient = intent.getStringExtra("INGREDIENT");
             String unite = intent.getStringExtra("UNITE");
@@ -73,27 +79,32 @@ public class PopupStockageActivity extends AppCompatActivity {
             composantListeIngredient.setEnabled(false);
             composantListeIngredient.setText(ingredient);
             txtQuantite.setText(quantite + "");
-            txtUniteMesure.setText(unite);
+            txtUniteMesureEditText.setText(unite);
         }
 
         stockageViewModel = new ViewModelProvider(this).get(StockageViewModel.class);
-
         //configurer les actions selon le type d'Action
         if(action.equals("ADD")){
             //Récupéré la liste initials des ingrédients et intitialiser la liste du composantpermettre la modifications intéractif de la liste des ingrédients
             stockageViewModel.chargerListeIngredient();
             stockageViewModel.getListeIngredient().observe(this, ingredients -> {
                 if(ingredients != null){
+                    Log.d("PopupStockage", "Ingredients received: " + ingredients.length); // Check count
+
                     msgErreur.setText("");
                     String[] noms = new String[ingredients.length];
                     for(int i = 0; i< noms.length; i++){
                         noms[i] = ingredients[i].getName();
                     }
-                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.item_liste_ingredient_popup, noms);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.item_liste_ingredient_popup, R.id.txtItemIngredient, noms);
                     composantListeIngredient.setAdapter(adapter);
                     composantListeIngredient.setThreshold(1);
                     listeIngredient = new ArrayList<>(Arrays.asList(ingredients));
+                    if (noms.length == 0) {
+                        Log.w("PopupStockage", "Ingredients list is empty!");
+                    }
                 }else{
+                    Log.e("PopupStockage", "Ingredients list is NULL");
                     msgErreur.setText("Erreur lors du chargement des ingrédients de la liste");
                 }
             });
@@ -107,7 +118,7 @@ public class PopupStockageActivity extends AppCompatActivity {
                         if(listeIngredient.get(i).getName().equals(ingredientChoisi)){
                             msgErreur.setText("");
                             String uniteDeMesure = listeIngredient.get(i).getUniteMesure();
-                            txtUniteMesure.setText(uniteDeMesure);
+                            txtUniteMesureEditText.setText(uniteDeMesure);
 
                             if(uniteDeMesure.equals("unite")){
                                 txtQuantite.setText("0");
@@ -158,12 +169,12 @@ public class PopupStockageActivity extends AppCompatActivity {
                     finish();
                 }
                 //lancer la requête de modification de l'objet sur la base de donné
-                Produit produit = new Produit(composantListeIngredient.getText().toString(), quantiteRecupere, txtUniteMesure.getText().toString());
+                Produit produit = new Produit(composantListeIngredient.getText().toString(), quantiteRecupere, txtUniteMesureEditText.getText().toString());
                 stockageViewModel.updateProduit(produit);
             } else if (action.equals("ADD")) {
 
                 //vérifier que l'ingrédient est dans la liste avant d'essayer de l'ajouter
-                Ingredient nouveau = new Ingredient(composantListeIngredient.getText().toString().trim(), txtUniteMesure.getText().toString());
+                Ingredient nouveau = new Ingredient(composantListeIngredient.getText().toString().trim(), txtUniteMesureEditText.getText().toString());
                 if(listeIngredient.contains(nouveau)){
                     Produit nouveauProduit = new Produit(nouveau.getName(), Double.parseDouble(txtQuantite.getText().toString()), nouveau.getUniteMesure());
                     stockageViewModel.ajouterProduit(nouveauProduit);
