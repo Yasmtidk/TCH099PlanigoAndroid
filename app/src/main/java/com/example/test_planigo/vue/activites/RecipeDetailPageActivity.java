@@ -88,7 +88,7 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
             recipeNameDetailTextView.setText(recette.getNom());
             recipeTimeTextView.setText(recette.getTemps_de_cuisson() + " minutes");
             recipeDifficultyTextView.setText(recette.getDifficulter());
-            recipePortionTextView.setText(recette.getPortions());
+            recipePortionTextView.setText(recette.getPortions() + " portions");
             recipeTypeTextView.setText(recette.getType());
             createurRecetteTextView.setText(recette.getCreateur_nom_utilisateur());
             descriptionRecetteTextView.setText(recette.getDescription());

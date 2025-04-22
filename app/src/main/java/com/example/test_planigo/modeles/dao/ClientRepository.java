@@ -40,6 +40,7 @@ public class ClientRepository {
      * Modifie connexionLiveData à true si c'Est un succès ou envoie un string s'il y a une erreur
      * @param client Le client à rojouter dans la base de donné
      */
+
     public void postNouveauClient(Client client) throws JSONException {
 
         (new Thread() {
@@ -48,11 +49,20 @@ public class ClientRepository {
 
                 //vérifier que le nom d'utilisateur (identifiant) est unique
                 try{
+                    Log.d("DEBUG_TAG", "Passage dans postNouveauClient");
                     JSONObject postObj = new JSONObject();
+
                     postObj.put("identifiant", client.getNom_utilisateur());
+                    Log.d("DEBUG_TAG", "Passage dans getNom_utilisateur" + client.getNom_utilisateur());
+
                     postObj.put("motDePasse", client.getMot_de_passe());
+                    Log.d("DEBUG_TAG", "Passage dans getMot_de_passe" + client.getMot_de_passe());
+
                     postObj.put("nom", client.getNom());
+                    Log.d("DEBUG_TAG", "Passage dans getNom" + client.getNom());
+
                     postObj.put("prenom", client.getPrenom());
+                    Log.d("DEBUG_TAG", "Passage dans getPrenom" + client.getPrenom());
 
                     RequestBody corpsPostRequete = RequestBody.create(postObj.toString(), JSON);
                     Request postRequete = new Request.Builder()

@@ -46,60 +46,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:text="@string/ma_liste_epicerie"
-                android:textColor="@color/black_text"
-                android:textSize="20sp"
-                android:textStyle="bold" />
 
             <ListView
                 android:id="@+id/groceryListView"
                 android:layout_width="match_parent"
-                android:layout_height="600dp"
+                android:layout_height="660dp"
+                android:layout_weight="1"
+                android:clipToPadding="false"
                 android:divider="@null"
                 android:dividerHeight="0dp"
-                android:nestedScrollingEnabled="false" />
-
-            <LinearLayout
-                android:id="@+id/ajouter_element_grocery_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/white_rounded_background"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="12dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="8dp"
-                    android:contentDescription="@string/ajouter_un_element"
-                    android:src="@drawable/pencil" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ajouter_un_element"
-                    android:textColor="@color/black_text"
-                    android:textSize="16sp" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginStart="8dp"
-                    android:contentDescription="@string/editer_un_element"
-                    android:src="@drawable/pencil" />
-
-            </LinearLayout>
-
-
+                android:paddingHorizontal="16dp"
+                android:paddingTop="16dp" />
         </LinearLayout>
     </ScrollView>
 

@@ -10,7 +10,7 @@
     android:paddingHorizontal="24dp"
     android:paddingTop="24dp"
     android:paddingBottom="32dp"
-    tools:context=".VueModele.activites.AccueilActivity">
+    tools:context=".vue.activites.AccueilActivity">
 
     <ImageView
         android:id="@+id/iv_logo"

@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.test_planigo.modeles.dao.ClientRepository;
-import com.example.test_planigo.modeles.dao.RecipeRepository;
+import com.example.test_planigo.modeles.dao.RecetteRepository;
 import com.example.test_planigo.modeles.dao.StockageRepository;
 import com.example.test_planigo.modeles.entitees.Client;
 import com.example.test_planigo.modeles.entitees.Recette;
@@ -20,7 +20,7 @@ public class PlanigoViewModel extends AndroidViewModel {
 
     private ClientRepository clientRepository;
     private MutableLiveData<Object> connexionLiveData;
-    private RecipeRepository recipeRepository;
+    private RecetteRepository recipeRepository;
     private StockageRepository stockageRepository;
     private LiveData<List<Recette>> recettes;
 
@@ -34,7 +34,7 @@ public class PlanigoViewModel extends AndroidViewModel {
     public PlanigoViewModel(Application application) {
         super(application);
         clientRepository = new ClientRepository(application);
-        recipeRepository = new RecipeRepository(application);
+        recipeRepository = new RecetteRepository(application);
         connexionLiveData = (MutableLiveData<Object>) clientRepository.getConnexion();
         recettes = recipeRepository.getRecettes();
     }
