@@ -2,12 +2,14 @@ package com.example.test_planigo.modeles.entitees;
 
 public class Client {
 
-    //private int id;
     private String nom;
     private String prenom;
     private String nom_utilisateur;
     private String mot_de_passe;
-
+    private String description;
+    private Integer age;
+    private String genre;
+    private String profileImageUrl;
     public Client() {
     }
 
@@ -17,21 +19,19 @@ public class Client {
         this.prenom = prenom;
         this.nom_utilisateur = nom_utilisateur;
         this.mot_de_passe = mot_de_passe;
+        this.description = null;
+        this.age = null;
+        this.genre = null;
+        this.profileImageUrl = null;
     }
 
-    /*public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }*/
 
     public String getNom() {
         return nom;
     }
 
     public void setNom(String nom) {
+
         this.nom = nom;
     }
 
@@ -40,6 +40,7 @@ public class Client {
     }
 
     public void setPrenom(String prenom) {
+
         this.prenom = prenom;
     }
 
@@ -56,6 +57,24 @@ public class Client {
     }
 
     public void setMot_de_passe(String mot_de_passe) {
+
         this.mot_de_passe = mot_de_passe;
     }
+
+    public String getDescription() { return description; }
+    public void setDescription(String description) {
+        this.description = description; }
+
+    public Integer getAge() { return age; }
+    public void setAge(Integer age) {
+        this.age = age; }
+
+    public String getGenre() { return genre; }
+    public void setGenre(String genre) {
+        this.genre = genre; }
+
+    public String getProfileImageUrl() { return profileImageUrl; }
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl; }
+
 }

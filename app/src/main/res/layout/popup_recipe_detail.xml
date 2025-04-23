@@ -6,6 +6,7 @@
     android:background="@color/light_gray_background">
 
     <ScrollView
+        android:id="@+id/mainScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_navigation"
@@ -45,7 +46,6 @@
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:textStyle="bold" />
-
             </LinearLayout>
 
             <ImageView
@@ -63,7 +63,7 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
                 android:text="Description text placeholder..."
-                android:textColor="@color/black_text"
+                android:textColor="@color/principal_color"
                 android:textSize="18sp" />
 
             <LinearLayout
@@ -74,19 +74,17 @@
                 android:paddingHorizontal="16dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
-
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:contentDescription="Time Icon"
                         android:src="@drawable/timeneeded"
                         app:tint="@color/secondary_color" />
-
                     <TextView
                         android:id="@+id/recipeTimeTextView"
                         android:layout_width="wrap_content"
@@ -98,19 +96,17 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
-
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:contentDescription="Difficulty Icon"
                         android:src="@drawable/level"
                         app:tint="@color/secondary_color" />
-
                     <TextView
                         android:id="@+id/recipeDifficultyTextView"
                         android:layout_width="wrap_content"
@@ -122,19 +118,17 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
-
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:contentDescription="Portion Icon"
                         android:src="@drawable/portion"
                         app:tint="@color/secondary_color" />
-
                     <TextView
                         android:id="@+id/recipePortionTextView"
                         android:layout_width="wrap_content"
@@ -155,19 +149,17 @@
                 android:paddingBottom="16dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
-
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:contentDescription="Category Icon"
                         android:src="@drawable/category_detail"
                         app:tint="@color/secondary_color" />
-
                     <TextView
                         android:id="@+id/recipeTypeTextView"
                         android:layout_width="wrap_content"
@@ -179,19 +171,17 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
-
                     <ImageView
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:contentDescription="Creator Icon"
                         android:src="@drawable/creator_detail"
                         app:tint="@color/secondary_color" />
-
                     <TextView
                         android:id="@+id/recipeCreatorTextView"
                         android:layout_width="wrap_content"
@@ -201,8 +191,6 @@
                         android:textColor="@color/black_text"
                         android:textSize="14sp" />
                 </LinearLayout>
-
-
             </LinearLayout>
 
             <TextView
@@ -221,6 +209,7 @@
                 android:id="@+id/listeRestrictionRecette"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
                 android:orientation="vertical"
                 android:paddingHorizontal="16dp"
                 android:paddingTop="8dp"
@@ -238,15 +227,14 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/ingredientsListContainer"
+            <LinearLayout
+                android:id="@+id/ingredientsListContainerLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingHorizontal="16dp"
+                android:paddingHorizontal="0dp"
                 android:paddingTop="8dp"
                 android:clipToPadding="false"/>
-
 
             <TextView
                 android:id="@+id/etapesTitleTextView"
@@ -264,7 +252,7 @@
                 android:id="@+id/etapesListContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
+                android:nestedScrollingEnabled="false"
                 android:clipToPadding="false"
                 android:orientation="vertical"
                 android:paddingHorizontal="16dp"

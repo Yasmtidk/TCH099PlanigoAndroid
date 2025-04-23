@@ -6,24 +6,51 @@
     android:orientation="vertical"
     android:background="@color/light_gray_background">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <LinearLayout
+        android:id="@+id/popupHeaderLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="16dp"
+        android:background="@color/principal_color">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/popup_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/principal_color"
-            app:title="@string/ajouter_un_element"
-            app:titleTextColor="@color/white"
-            app:navigationIconTint="@color/white" />
+        <ImageView
+            android:id="@+id/backButtonPopupStockage"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/go_back"
+            android:contentDescription="@string/back"
+            app:tint="@color/white"
+            android:layout_marginEnd="16dp"/>
 
-    </com.google.android.material.appbar.AppBarLayout>
+        <ImageView
+            android:id="@+id/popupIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/pencil"
+            android:contentDescription="@string/ajouter_un_element"
+            app:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/popupTitleTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/ajouter_un_element"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:gravity="start"
+            android:layout_marginStart="16dp"/>
+
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:fillViewport="true">
 
         <LinearLayout
@@ -42,11 +69,11 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ingredientNameTextInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/nom_ingredient"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                android:hint="@string/nom_ingredient">
 
                 <AutoCompleteTextView
                     android:id="@+id/listeIngredientAutoComplete"
@@ -59,35 +86,35 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginBottom="24dp"
                 android:baselineAligned="false"
-                android:layout_marginBottom="24dp">
+                android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/quantityTextInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:hint="@string/quantite"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_marginEnd="8dp">
+                    android:hint="@string/quantite">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/quantityEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
-                        android:singleLine="true"/>
+                        android:singleLine="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/unitTextInputLayout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
-                    android:hint="@string/unite"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    android:hint="@string/unite">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/uniteMesureEditText"
@@ -104,26 +131,26 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="end">
+                android:gravity="end"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/buttonCancel"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/annuler"
-                    android:textColor="@color/principal_color"
                     android:layout_marginEnd="16dp"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"/>
+                    android:text="@string/annuler"
+                    android:textColor="@color/principal_color" />
 
                 <Button
                     android:id="@+id/buttonOk"
+                    style="@style/Widget.MaterialComponents.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/ok"
                     android:backgroundTint="@color/secondary_color"
-                    android:textColor="@color/white"
-                    style="@style/Widget.MaterialComponents.Button"/>
+                    android:text="@string/ok"
+                    android:textColor="@color/white" />
             </LinearLayout>
 
         </LinearLayout>

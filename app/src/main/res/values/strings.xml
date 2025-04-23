@@ -6,7 +6,7 @@
     <string name="mot_de_passe">Mot de passe</string>
     <string name="se_connecter">Se connecter</string>
     <string name="creer_un_compte">Créer un compte</string>
-    <string name="planigo_tagline">Planigo  : Organisez, cuisinez, économisez !</string>
+    <string name="planigo_tagline">Organisez, cuisinez, économisez !</string>
     <string name="planigo_tagline_multiline">Planigo  \nOrganisez, cuisinez, économisez !</string>
 
     <string name="prenom">Prénom :</string>
@@ -43,6 +43,7 @@
     <string name="plus_de_30_min">Plus de 30 min</string>
     <string name="type_filter">Type</string>
     <string name="mon_plan_de_semaine">Mon plan de semaine</string>
+    <string name="planificateur">Planificateur</string>
     <string name="mes_recettes">Mes Recettes</string>
     <string name="ma_liste_epicerie">Ma liste d\'épicerie</string>
     <string name="mon_stock_ingredients">Mon stock d\'ingrédients</string>

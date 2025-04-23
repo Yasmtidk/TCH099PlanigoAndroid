@@ -2,6 +2,7 @@ package com.example.test_planigo.vue.activites;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ public class MaListeEpicerieActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private ListView groceryListView;
+    private ImageView backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +28,15 @@ public class MaListeEpicerieActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         groceryListView = findViewById(R.id.groceryListView);
+        backButton = findViewById(R.id.backButtonGrocery);
 
-        bottomNavigationView.setSelectedItemId(R.id.nav_courses);
+        bottomNavigationView.setSelectedItemId(R.id.nav_planner);
+
+        if (backButton != null) {
+            backButton.setOnClickListener(v -> {
+                finish();
+            });
+        }
 
         List<Produit> groceryItemList = new ArrayList<>();
         groceryItemList.add(new Produit("Lait", 250, "ml", "lait"));
@@ -40,13 +49,13 @@ public class MaListeEpicerieActivity extends AppCompatActivity {
         groceryItemList.add(new Produit("Carottes", 3, "unité", "carottes"));
         groceryItemList.add(new Produit("Saucisses", 2, "unité", "saucisses"));
 
-
         GroceryListAdapter adapter = new GroceryListAdapter(this, groceryItemList);
         groceryListView.setAdapter(adapter);
 
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
+
             if (id == R.id.nav_accueil) {
                 Intent intent = new Intent(MaListeEpicerieActivity.this, AccueilActivity.class);
                 startActivity(intent);
@@ -60,10 +69,6 @@ public class MaListeEpicerieActivity extends AppCompatActivity {
             } else if (id == R.id.nav_recettes) {
                 Intent intent = new Intent(MaListeEpicerieActivity.this, RechercheRecetteActivity.class);
                 startActivity(intent);
-                return true;
-
-            } else if (id == R.id.nav_courses) {
-                bottomNavigationView.setSelectedItemId(R.id.nav_courses);
                 return true;
 
             } else if (id == R.id.nav_profile) {

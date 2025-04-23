@@ -1,45 +1,48 @@
 package com.example.test_planigo.vue.activites;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test_planigo.VueModele.RecetteViewModel;
 import com.example.test_planigo.modeles.entitees.Produit;
-import com.example.test_planigo.vue.adaptateurs.ItemIngredientAdapter;
+import com.example.test_planigo.modeles.entitees.RecetteAbrege;
+import com.example.test_planigo.modeles.entitees.RecetteComplete;
 import com.example.test_planigo.vue.adaptateurs.ItemUniqueAdapter;
+import com.example.test_planigo.vue.adaptateurs.ItemStepAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.test_planigo.R;
-import com.example.test_planigo.VueModele.PlanigoViewModel;
-import com.example.test_planigo.modeles.entitees.Recette;
 import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
-import java.util.List;
-
+import java.util.Locale;
 
 public class RecipeDetailPageActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView imageRecette;
     private TextView recipeNameDetailTextView, recipeTimeTextView, recipeDifficultyTextView, recipePortionTextView, recipeTypeTextView, createurRecetteTextView, descriptionRecetteTextView;
-    private RecyclerView listeRestrictions, listeIngredients, listeEtapes;
+    private RecyclerView listeRestrictions, listeEtapes;
+    private LinearLayout ingredientsListLayout;
     private BottomNavigationView bottomNavigationView;
+    private ImageView backButton;
+    private Button ajouterListeRecetteButton;
+    private RecetteComplete currentRecipe;
     private RecetteViewModel viewModel;
-    private ItemUniqueAdapter restrictionsAdapter, etapeAdapter;
-    private ItemIngredientAdapter itemProduitAdapter;
-
+    private ItemUniqueAdapter restrictionsAdapter;
+    private ItemStepAdapter etapeAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +51,6 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
 
         viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(RecetteViewModel.class);
 
-        /*imageRecette;
-    private TextView recipeNameDetailTextView, recipeTimeTextView, recipeDifficultyTextView, recipePortionTextView, recipeTypeTextView, createurRecetteTextView, descriptionRecetteTextView;
-    private ListView listeRestrictions, listeIngredients, listeEtapes;*/
-
-        //Créer les composants
         imageRecette = findViewById(R.id.recipeDetailImageView);
         recipeNameDetailTextView = findViewById(R.id.recipeNameDetailTextView);
         recipeTimeTextView = findViewById(R.id.recipeTimeTextView);
@@ -60,126 +58,157 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
         recipePortionTextView = findViewById(R.id.recipePortionTextView);
         recipeTypeTextView = findViewById(R.id.recipeTypeTextView);
         createurRecetteTextView = findViewById(R.id.recipeCreatorTextView);
-        listeRestrictions = findViewById(R.id.listeRestrictionRecette);
         descriptionRecetteTextView = findViewById(R.id.descriptionRecette);
-        listeIngredients = findViewById(R.id.ingredientsListContainer);
+        listeRestrictions = findViewById(R.id.listeRestrictionRecette);
+        ingredientsListLayout = findViewById(R.id.ingredientsListContainerLayout);
         listeEtapes = findViewById(R.id.etapesListContainer);
+        backButton = findViewById(R.id.backButtonRecipeDetail);
+        ajouterListeRecetteButton = findViewById(R.id.ajouterListeRecetteButton);
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        // Listeners
+        if (backButton != null) {
+            backButton.setOnClickListener(this);
+        }
+        if (ajouterListeRecetteButton != null) {
+            ajouterListeRecetteButton.setOnClickListener(this);
+        }
 
         listeRestrictions.setLayoutManager(new LinearLayoutManager(this));
-        listeIngredients.setLayoutManager(new LinearLayoutManager(this));
         listeEtapes.setLayoutManager(new LinearLayoutManager(this));
+        listeRestrictions.setNestedScrollingEnabled(false);
+        listeEtapes.setNestedScrollingEnabled(false);
 
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_recettes);
 
-        //lancer la requete de récupération de la recette si on trouve l'id, sinon on termine l'activité
+        // Récupération ID recette
         int recipeId = getIntent().getIntExtra("ID", -1);
         if (recipeId != -1) {
+            Log.d("RecipeDetail", "Requesting recipe details for ID: " + recipeId);
             viewModel.setRecetteActuel(recipeId);
         } else {
-            Toast.makeText(this, "Recipe ID not found!", Toast.LENGTH_SHORT).show();
+            Log.e("RecipeDetail", "No valid recipe ID found in Intent extras.");
+            Toast.makeText(this, "Erreur: ID de recette introuvable!", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
 
-        //Remplir les composants selon la recette complète actuel
-        viewModel.getRecetteCompleteActuel().observe(this, recette ->{
+        viewModel.getRecetteCompleteActuel().observe(this, recette -> {
+            if (recette == null) {
+                Log.e("RecipeDetail", "Received null recipe object from ViewModel for ID: " + recipeId);
+                Toast.makeText(this, "Erreur: Impossible de charger les détails de la recette.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            currentRecipe = recette;
+            Log.d("RecipeDetail", "Displaying recipe details for: " + recette.getNom());
 
             recipeNameDetailTextView.setText(recette.getNom());
             recipeTimeTextView.setText(recette.getTemps_de_cuisson() + " minutes");
             recipeDifficultyTextView.setText(recette.getDifficulter());
-            recipePortionTextView.setText(recette.getPortions() + " portions");
+            recipePortionTextView.setText(String.valueOf(recette.getPortions()) + " portions");
             recipeTypeTextView.setText(recette.getType());
             createurRecetteTextView.setText(recette.getCreateur_nom_utilisateur());
             descriptionRecetteTextView.setText(recette.getDescription());
 
-            restrictionsAdapter = new ItemUniqueAdapter(Arrays.asList(recette.getRestrictions()));
-            etapeAdapter = new ItemUniqueAdapter(Arrays.asList(recette.getEtapes()));
-            itemProduitAdapter = new ItemIngredientAdapter(Arrays.asList(recette.getIngredients()));
+            if (recette.getImage() != null && !recette.getImage().isEmpty()) {
+                Picasso.get().load(recette.getImage()).placeholder(R.drawable.planigologo).error(R.drawable.planigologo).into(imageRecette);
+            } else {
+                imageRecette.setImageResource(R.drawable.planigologo);
+            }
 
+            restrictionsAdapter = new ItemUniqueAdapter(Arrays.asList(recette.getRestrictions()));
             listeRestrictions.setAdapter(restrictionsAdapter);
+
+            remplirListeIngredients(recette.getIngredients());
+
+            etapeAdapter = new ItemStepAdapter(Arrays.asList(recette.getEtapes()));
             listeEtapes.setAdapter(etapeAdapter);
-            listeIngredients.setAdapter(itemProduitAdapter);
 
         });
 
+        viewModel.getResultatErreurAPILiveData().observe(this, error -> {
+            if (error instanceof String) {
+                Log.e("RecipeDetail", "API Error reported: " + error);
+                Toast.makeText(this, "Erreur API: " + error, Toast.LENGTH_LONG).show();
+            }
+        });
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
+            Intent intent = null;
+
             if (id == R.id.nav_accueil) {
-                Intent intent = new Intent(RecipeDetailPageActivity.this, AccueilActivity.class);
-                startActivity(intent);
-                return true;
-
+                intent = new Intent(RecipeDetailPageActivity.this, AccueilActivity.class);
             } else if (id == R.id.nav_stock) {
-                Intent intent = new Intent(RecipeDetailPageActivity.this, MonStockIngredientsActivity.class);
-                startActivity(intent);
-                return true;
-
+                intent = new Intent(RecipeDetailPageActivity.this, MonStockIngredientsActivity.class);
             } else if (id == R.id.nav_recettes) {
-                bottomNavigationView.setSelectedItemId(R.id.nav_recettes);
                 return true;
-
-            } else if (id == R.id.nav_courses) {
-                Intent intent = new Intent(RecipeDetailPageActivity.this, MaListeEpicerieActivity.class);
-                startActivity(intent);
-                return true;
-
+            } else if (id == R.id.nav_planner) {
+                intent = new Intent(RecipeDetailPageActivity.this, WeeklyPlannerActivity.class);
             } else if (id == R.id.nav_profile) {
-                Intent intent = new Intent(RecipeDetailPageActivity.this, ProfileActivity.class);
+                intent = new Intent(RecipeDetailPageActivity.this, ProfileActivity.class);
+            }
+
+            if (intent != null) {
                 startActivity(intent);
                 return true;
             }
+
             return false;
         });
     }
 
-    /*private void populateRecipeDetails(Recette recipe) {
-        recipeNameDetailTextView.setText(recipe.getNom());
-        recipeTimeTextView.setText(recipe.getTemps_de_cuisson() + " minutes");
-        recipeDifficultyTextView.setText("Facile");
-        recipePortionTextView.setText("3 portions");
-        Picasso.get()
-                .load(recipe.getImage())
-                .placeholder(R.drawable.planigologo)
-                .error(R.drawable.planigologo)
-                .into(recipeDetailImageView);
+    private void remplirListeIngredients(Produit[] ingredients) {
+        if (ingredientsListLayout == null) return;
 
-        ingredientsListContainer.removeAllViews();
-        for (String ingredientName : recipe.getIngredients()) {
-            View ingredientItemView = getLayoutInflater().inflate(R.layout.list_item_recipe_detail, ingredientsListContainer, false);
-            TextView ingredientNameTextView = ingredientItemView.findViewById(R.id.ingredientNameTextView);
-            ingredientNameTextView.setText(ingredientName);
-             ingredientsListContainer.addView(ingredientItemView);
+        ingredientsListLayout.removeAllViews();
+
+        if (ingredients == null || ingredients.length == 0) {
+            TextView noIngredientsText = new TextView(this);
+            noIngredientsText.setText("Aucun ingrédient listé.");
+            noIngredientsText.setPadding(16, 8, 16, 8);
+            ingredientsListLayout.addView(noIngredientsText);
+            return;
         }
 
-        etapesListContainer.removeAllViews();
-        List<String> steps = recipe.getEtapes();
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        int stepNumber = 1;
-        for (String stepText : steps) {
-            TextView stepTextView = new TextView(this);
-            stepTextView.setText(stepNumber + ". " + stepText);
-            stepTextView.setTextColor(ContextCompat.getColor(this, R.color.black_text));
-            stepTextView.setTextSize(16);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, 0, 0, 16);
-            stepTextView.setLayoutParams(params);
-            etapesListContainer.addView(stepTextView);
-            stepNumber++;
+        for (Produit produit : ingredients) {
+            View itemView = inflater.inflate(R.layout.list_item_recipe_detail, ingredientsListLayout, false);
+
+            TextView nameTextView = itemView.findViewById(R.id.ingredientNameTextView);
+            TextView quantityTextView = itemView.findViewById(R.id.ingredientQuantityTextView);
+
+            nameTextView.setText(produit.getName());
+            String quantityString = String.format(Locale.getDefault(), "%.2f", produit.getQuantity()).replaceAll("\\.?0*$", "");
+            quantityTextView.setText(String.format("%s %s", quantityString, produit.getUnit()));
+
+            ingredientsListLayout.addView(itemView);
         }
-    }*/
+    }
+
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.backButtonRecipeDetail) {
             finish();
-
-        }/*  if (id == R.id.ajouterListeRecetteButton) {
-             Toast.makeText(this, "TODO smt!", Toast.LENGTH_SHORT).show();
-        }*/
+        } else if (id == R.id.ajouterListeRecetteButton) {
+            if (currentRecipe != null) {
+                // Créer un RecetteAbrege à partir de RecetteComplete pour l'ajout simulé
+                RecetteAbrege recetteAbrege = new RecetteAbrege(
+                        currentRecipe.getId(),
+                        currentRecipe.getNom(),
+                        currentRecipe.getTemps_de_cuisson(),
+                        currentRecipe.getType(),
+                        currentRecipe.getImage()
+                );
+                MaListeRecettesActivity.addRecipeToStaticList(recetteAbrege);
+                Toast.makeText(this, "'" + currentRecipe.getNom() + "' ajoutée à vos recettes (simulé)!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Erreur: Impossible d'ajouter la recette.", Toast.LENGTH_SHORT).show();
+            }
+            // TODO: Remplacer par un appel ViewModel/Repository pour sauvegarde réelle en DB
+        }
     }
-
-
 }
