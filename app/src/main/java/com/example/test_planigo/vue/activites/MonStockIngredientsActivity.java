@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.view.View;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -121,8 +120,8 @@ public class MonStockIngredientsActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
 
-            } else if (id == R.id.nav_courses) {
-                Intent intent = new Intent(MonStockIngredientsActivity.this, MaListeEpicerieActivity.class);
+            } else if (id == R.id.nav_planner) {
+                Intent intent = new Intent(MonStockIngredientsActivity.this, WeeklyPlannerActivity.class);
                 startActivity(intent);
                 return true;
 

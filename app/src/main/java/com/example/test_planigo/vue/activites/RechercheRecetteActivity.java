@@ -146,8 +146,8 @@ public class RechercheRecetteActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
 
-            } else if (id == R.id.nav_courses) {
-                Intent intent = new Intent(RechercheRecetteActivity.this, MaListeEpicerieActivity.class);
+            } else if (id == R.id.nav_planner) {
+                Intent intent = new Intent(RechercheRecetteActivity.this, WeeklyPlannerActivity.class);
                 startActivity(intent);
                 return true;
 

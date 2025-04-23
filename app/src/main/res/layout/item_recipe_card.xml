@@ -1,42 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp">
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
 
-    <ImageView
-        android:id="@+id/recetteListeImage"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/planigologo"
-        android:contentDescription="Recipe Image"/>
-
-    <TextView
-        android:id="@+id/recetteListeNom"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@color/black_text"
-        android:paddingTop="8dp"/>
+        android:orientation="vertical"
+        android:padding="8dp">
 
-    <TextView
-        android:id="@+id/recetteListeTempsPreparation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:textColor="@color/black_text"
-        android:maxLines="2"
-        android:ellipsize="end"/>
+        <ImageView
+            android:id="@+id/recetteListeImage"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            tools:srcCompat="@drawable/planigologo"
+            android:contentDescription="Recipe Image"/>
 
-    <TextView
-        android:id="@+id/recetteListeType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:textColor="@color/hint_text_color"
-        android:paddingTop="4dp"/>
+        <TextView
+            android:id="@+id/recetteListeNom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/black_text"
+            android:paddingTop="6dp"
+            android:maxLines="2"
+            android:ellipsize="end"
+            tools:text="Nom Long De Recette"/>
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/recetteListeTempsPreparation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/black_text"
+            tools:text="30 minutes"/>
+
+        <TextView
+            android:id="@+id/recetteListeType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:textColor="@color/hint_text_color"
+            android:paddingTop="2dp"
+            tools:text="Plat Principal"/>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

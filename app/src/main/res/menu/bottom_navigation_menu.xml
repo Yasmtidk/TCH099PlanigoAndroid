@@ -12,9 +12,9 @@
         android:title="@string/stock" />
 
     <item
-        android:id="@+id/nav_courses"
-        android:icon="@drawable/grocery_cart"
-        android:title="@string/courses" />
+        android:id="@+id/nav_planner"
+        android:icon="@drawable/weekplanner"
+        android:title="@string/planificateur" />
 
     <item
         android:id="@+id/nav_recettes"

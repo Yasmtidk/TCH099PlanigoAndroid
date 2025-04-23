@@ -79,8 +79,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
                 return true;
 
-            } else if (id == R.id.nav_courses) {
-                Intent intent = new Intent(ProfileActivity.this, MaListeEpicerieActivity.class);
+            } else if (id == R.id.nav_planner) {
+                Intent intent = new Intent(ProfileActivity.this, WeeklyPlannerActivity.class);
                 startActivity(intent);
                 return true;
 

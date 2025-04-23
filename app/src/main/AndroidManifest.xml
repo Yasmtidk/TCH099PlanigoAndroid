@@ -40,6 +40,13 @@
 
         <activity android:name=".vue.activites.RecipeDetailPageActivity"
             android:exported="false"/>
+
+        <activity android:name=".vue.activites.WeeklyPlannerActivity"
+            android:exported="false"/>
+
+        <activity android:name=".vue.activites.MaListeRecettesActivity"
+            android:exported="false"/>
+
         <activity
             android:name=".vue.activites.MainActivity"
             android:exported="true">

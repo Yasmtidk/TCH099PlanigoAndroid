@@ -60,7 +60,7 @@
                 android:layout_height="660dp"
                 android:layout_weight="1"
                 android:divider="@null"
-                android:dividerHeight="0dp"
+                android:dividerHeight="5dp"
                 android:nestedScrollingEnabled="false"
                 android:paddingHorizontal="16dp"
                 android:paddingTop="8dp" />

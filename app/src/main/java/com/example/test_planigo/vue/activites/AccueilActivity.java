@@ -48,8 +48,8 @@ public class AccueilActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
                 return true;
 
-            } else if (id == R.id.nav_courses) {
-                Intent intent = new Intent(AccueilActivity.this, MaListeEpicerieActivity.class);
+            } else if (id == R.id.nav_planner) {
+                Intent intent = new Intent(AccueilActivity.this, WeeklyPlannerActivity.class);
                 startActivity(intent);
                 return true;
 
