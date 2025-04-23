@@ -2,14 +2,11 @@ package com.example.test_planigo.modeles.dao;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.test_planigo.modeles.entitees.Client;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,9 +20,8 @@ public class ClientRepository {
     private final OkHttpClient okHttpClient = new OkHttpClient();
     private final MutableLiveData<Object> connexionLiveData = new MutableLiveData<>();
     private final MediaType JSON = MediaType.get("application/json; charset=utf-8");
-    private final ObjectMapper mapper = new ObjectMapper();
 
-    private Context context;
+    private Context context; // Gardé pour l'instant, bien qu'inutilisé dans les méthodes montrées
 
     public ClientRepository(Application application) {
         this.context = application.getApplicationContext();
@@ -36,106 +32,112 @@ public class ClientRepository {
     }
 
     /**
-     * Créer un nouvelle utilisateur dans la base de donné
-     * Modifie connexionLiveData à true si c'Est un succès ou envoie un string s'il y a une erreur
-     * @param client Le client à rojouter dans la base de donné
+     * Créer un nouvel utilisateur dans la base de données.
+     * Modifie connexionLiveData à true si c'est un succès ou envoie un string (message d'erreur) s'il y a une erreur.
+     * @param client Le client à ajouter dans la base de données.
      */
-
-    public void postNouveauClient(Client client) throws JSONException {
-
+    public void postNouveauClient(Client client) throws JSONException { // JSONException peut être levée par postObj.put
         (new Thread() {
             @Override
             public void run() {
-
-                //vérifier que le nom d'utilisateur (identifiant) est unique
-                try{
-                    Log.d("DEBUG_TAG", "Passage dans postNouveauClient");
+                try {
+                    // Préparer l'objet JSON pour la requête
                     JSONObject postObj = new JSONObject();
-
                     postObj.put("identifiant", client.getNom_utilisateur());
-                    Log.d("DEBUG_TAG", "Passage dans getNom_utilisateur" + client.getNom_utilisateur());
-
                     postObj.put("motDePasse", client.getMot_de_passe());
-                    Log.d("DEBUG_TAG", "Passage dans getMot_de_passe" + client.getMot_de_passe());
-
                     postObj.put("nom", client.getNom());
-                    Log.d("DEBUG_TAG", "Passage dans getNom" + client.getNom());
-
                     postObj.put("prenom", client.getPrenom());
-                    Log.d("DEBUG_TAG", "Passage dans getPrenom" + client.getPrenom());
 
+                    // Envoyer la requête et récupérer la réponse
                     RequestBody corpsPostRequete = RequestBody.create(postObj.toString(), JSON);
                     Request postRequete = new Request.Builder()
                             .url(URL_POINT_ENTREE + "inscription.php/inscrire/")
                             .post(corpsPostRequete)
                             .build();
                     Response response = okHttpClient.newCall(postRequete).execute();
+                    if (!response.isSuccessful()) throw new IOException("Code inattendu " + response); // Gestion erreur HTTP
+
                     ResponseBody responseBody = response.body();
                     String stringResponce = responseBody.string();
-                    String statutRequete = new JSONObject(stringResponce).getString("statut");
+                    JSONObject jsonResponse = new JSONObject(stringResponce); // Analyser une seule fois
+                    String statutRequete = jsonResponse.getString("statut");
 
-                    //Si le nom d'utilisateur est déjà présent (identifiant) ou tout autre erreur en lien avec le mot de passe : affiche erreur
-                    //Sinon, afficher un message de succès
-                    if(statutRequete.equals("error")){
-                        String messageRequete = new JSONObject(stringResponce).getString("message");
+                    // Si le nom d'utilisateur est déjà présent (identifiant) ou autre erreur : affiche erreur
+                    // Sinon, on renvoie true
+                    if (statutRequete.equals("error")) {
+                        String messageRequete = jsonResponse.getString("message");
                         connexionLiveData.postValue(messageRequete);
-                    }else if(statutRequete.equals("success")){
-
-                        connexionLiveData.postValue(true);
+                    } else if (statutRequete.equals("success")) {
+                        connexionLiveData.postValue(true); // Indiquer le succès
+                    } else {
+                        // Gérer les statuts inattendus
+                        connexionLiveData.postValue("Réponse inattendue du serveur.");
                     }
 
                 } catch (IOException | JSONException e) {
-                    connexionLiveData.postValue(false);
-                    throw new RuntimeException(e);
+                    // Envoyer un message d'erreur générique
+                    connexionLiveData.postValue("Erreur de communication ou de formatage.");
+                    // Envisager de logger l'exception: e.printStackTrace();
                 }
             }
         }).start();
     }
 
-    /**Vérifier si les champs d'entrés d'une connextion sont valide
-     *  Modifie connexionLiveData selon le résultat
-     *    Envoie le client récupéré en cas de succes ou envoie un string en cas d'erreur
-     * @param nomUtilisateur Le nom d'utilisateur présumé du client
-     * @param motDePasse  Le mot de passe présumé du client
+
+    /**
+     * Vérifie si les champs d'entrée d'une connexion sont valides.
+     * Modifie connexionLiveData selon le résultat.
+     * Envoie le client récupéré en cas de succès ou envoie un string (message d'erreur) en cas d'erreur.
+     * @param nomUtilisateur Le nom d'utilisateur présumé du client.
+     * @param motDePasse  Le mot de passe présumé du client.
      */
-    public void connexion(String nomUtilisateur, String motDePasse) throws JSONException {
+    public void connexion(String nomUtilisateur, String motDePasse) throws JSONException { // Peut être levée par postObj.put
         (new Thread() {
             @Override
             public void run() {
-
-                try{
+                try {
+                    // Préparer l'objet JSON pour la requête
                     JSONObject postObj = new JSONObject();
                     postObj.put("identifiant", nomUtilisateur);
                     postObj.put("motDePasse", motDePasse);
 
+                    // Envoyer la requête et récupérer la réponse
                     RequestBody corpsPostRequete = RequestBody.create(postObj.toString(), JSON);
                     Request postRequete = new Request.Builder()
                             .url(URL_POINT_ENTREE + "login.php/login/")
                             .post(corpsPostRequete)
                             .build();
                     Response response = okHttpClient.newCall(postRequete).execute();
+                    if (!response.isSuccessful()) throw new IOException("Code inattendu " + response); // Gestion erreur HTTP
+
                     ResponseBody responseBody = response.body();
                     String stringResponce = responseBody.string();
-                    String statutRequete = new JSONObject(stringResponce).getString("statut");
+                    JSONObject jsonResponse = new JSONObject(stringResponce); // Analyser une seule fois
+                    String statutRequete = jsonResponse.getString("statut");
 
-                    if(statutRequete.equals("error")){
-                        String messageRequete = new JSONObject(stringResponce).getString("message");
+                    // Afficher le message d'erreur ou créer le client selon le statut de la réponse
+                    if (statutRequete.equals("error")) {
+                        String messageRequete = jsonResponse.getString("message");
                         connexionLiveData.postValue(messageRequete);
-                    }else if(statutRequete.equals("success")){
-
-                        //Créer le nouveau client
-                        String nomRequete = new JSONObject(stringResponce).getString("nom");
-                        String prenomRequete = new JSONObject(stringResponce).getString("prenom");
+                    } else if (statutRequete.equals("success")) {
+                        // Créer le nouveau client avec les informations reçues
+                        String nomRequete = jsonResponse.getString("nom");
+                        String prenomRequete = jsonResponse.getString("prenom");
                         Client clientConnecte = new Client(nomRequete, prenomRequete, nomUtilisateur, motDePasse);
-                        connexionLiveData.postValue(clientConnecte);
+                        // Potentiellement récupérer et définir d'autres champs si l'API les fournit
+                        // if (jsonResponse.has("description")) clientConnecte.setDescription(jsonResponse.getString("description"));
+                        // if (jsonResponse.has("age")) clientConnecte.setAge(jsonResponse.getInt("age"));
+                        connexionLiveData.postValue(clientConnecte); // Envoyer l'objet Client complet
+                    } else {
+                        // Gérer les statuts inattendus
+                        connexionLiveData.postValue("Réponse inattendue du serveur.");
                     }
 
-                }catch (IOException | JSONException e) {
+                } catch (IOException | JSONException e) {
                     connexionLiveData.postValue("Erreur de connexion au serveur");
-                    throw new RuntimeException(e);
+                    // Envisager de logger l'exception: e.printStackTrace();
                 }
             }
         }).start();
     }
 }
-
