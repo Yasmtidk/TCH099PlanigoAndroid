@@ -6,25 +6,7 @@
     android:gravity="center_vertical"
     android:paddingVertical="8dp"
     android:paddingHorizontal="16dp"
-    android:background="@drawable/white_rounded_background"
     android:layout_marginBottom="8dp">
-
-    <CheckBox
-        android:id="@+id/ingredientCheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:clickable="false"
-        android:focusable="false"
-        android:focusableInTouchMode="false"/>
-
-    <ImageView
-        android:id="@+id/ingredientIconImageView"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
-        android:layout_marginEnd="8dp"
-        android:src="@drawable/planigologo"
-        android:contentDescription="Ingredient Icon"/>
 
     <TextView
         android:id="@+id/ingredientNameTextView"
