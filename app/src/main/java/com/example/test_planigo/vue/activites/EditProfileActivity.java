@@ -40,8 +40,8 @@ public class EditProfileActivity extends AppCompatActivity {
                 startActivity(intent);
                 return true;
 
-            } else if (id == R.id.nav_courses) {
-                Intent intent = new Intent(EditProfileActivity.this, MaListeEpicerieActivity.class);
+            } else if (id == R.id.nav_planner) {
+                Intent intent = new Intent(EditProfileActivity.this, WeeklyPlannerActivity.class);
                 startActivity(intent);
                 return true;
 

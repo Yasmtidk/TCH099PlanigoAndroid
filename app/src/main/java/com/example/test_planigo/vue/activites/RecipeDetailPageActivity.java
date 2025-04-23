@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test_planigo.VueModele.RecetteViewModel;
 import com.example.test_planigo.modeles.entitees.Produit;
+import com.example.test_planigo.modeles.entitees.RecetteAbrege;
+import com.example.test_planigo.modeles.entitees.RecetteComplete;
 import com.example.test_planigo.vue.adaptateurs.ItemUniqueAdapter;
 import com.example.test_planigo.vue.adaptateurs.ItemStepAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -37,7 +39,7 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
     private BottomNavigationView bottomNavigationView;
     private ImageView backButton;
     private Button ajouterListeRecetteButton;
-
+    private RecetteComplete currentRecipe;
     private RecetteViewModel viewModel;
     private ItemUniqueAdapter restrictionsAdapter;
     private ItemStepAdapter etapeAdapter;
@@ -97,6 +99,7 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
                 Toast.makeText(this, "Erreur: Impossible de charger les détails de la recette.", Toast.LENGTH_SHORT).show();
                 return;
             }
+            currentRecipe = recette;
             Log.d("RecipeDetail", "Displaying recipe details for: " + recette.getNom());
 
             recipeNameDetailTextView.setText(recette.getNom());
@@ -140,8 +143,8 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
                 intent = new Intent(RecipeDetailPageActivity.this, MonStockIngredientsActivity.class);
             } else if (id == R.id.nav_recettes) {
                 return true;
-            } else if (id == R.id.nav_courses) {
-                intent = new Intent(RecipeDetailPageActivity.this, MaListeEpicerieActivity.class);
+            } else if (id == R.id.nav_planner) {
+                intent = new Intent(RecipeDetailPageActivity.this, WeeklyPlannerActivity.class);
             } else if (id == R.id.nav_profile) {
                 intent = new Intent(RecipeDetailPageActivity.this, ProfileActivity.class);
             }
@@ -191,8 +194,21 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
         if (id == R.id.backButtonRecipeDetail) {
             finish();
         } else if (id == R.id.ajouterListeRecetteButton) {
-            Toast.makeText(this, "Fonctionnalité 'Ajouter à ma liste' à venir!", Toast.LENGTH_SHORT).show();
-            // TODO: Implement logic to add the recipe to a user list
+            if (currentRecipe != null) {
+                // Créer un RecetteAbrege à partir de RecetteComplete pour l'ajout simulé
+                RecetteAbrege recetteAbrege = new RecetteAbrege(
+                        currentRecipe.getId(),
+                        currentRecipe.getNom(),
+                        currentRecipe.getTemps_de_cuisson(),
+                        currentRecipe.getType(),
+                        currentRecipe.getImage()
+                );
+                MaListeRecettesActivity.addRecipeToStaticList(recetteAbrege);
+                Toast.makeText(this, "'" + currentRecipe.getNom() + "' ajoutée à vos recettes (simulé)!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Erreur: Impossible d'ajouter la recette.", Toast.LENGTH_SHORT).show();
+            }
+            // TODO: Remplacer par un appel ViewModel/Repository pour sauvegarde réelle en DB
         }
     }
 }
