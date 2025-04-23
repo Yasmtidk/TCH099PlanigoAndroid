@@ -5,30 +5,51 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.test_planigo.VueModele.RecetteViewModel;
+import com.example.test_planigo.VueModele.StockageViewModel;
 import com.example.test_planigo.modeles.entitees.Produit;
+import com.example.test_planigo.vue.adaptateurs.ItemIngredientAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.test_planigo.R;
 import com.example.test_planigo.vue.adaptateurs.GroceryListAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MaListeEpicerieActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private ListView groceryListView;
+    private StockageViewModel viewModel;
+    private ItemIngredientAdapter adapter;
+    private RecyclerView compteneurListeEpicerie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ma_liste_epicerie);
 
+        viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(StockageViewModel.class);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        groceryListView = findViewById(R.id.groceryListView);
+        compteneurListeEpicerie = findViewById(R.id.groceryListView);
 
+        compteneurListeEpicerie.setLayoutManager(new LinearLayoutManager(this));
         bottomNavigationView.setSelectedItemId(R.id.nav_courses);
 
+        //Récupéré la liste d'épicerie pour l'initialisation
+        viewModel.getListeProduit().observe(this, produits -> {
+            adapter = new ItemIngredientAdapter(Arrays.asList(produits));
+            compteneurListeEpicerie.setAdapter(adapter);
+        });
+
+        viewModel.chargerListeEpicerie();
+
+        /*
         List<Produit> groceryItemList = new ArrayList<>();
         groceryItemList.add(new Produit("Lait", 250, "ml", "lait"));
         groceryItemList.add(new Produit("Patates", 4, "unité", "patates"));
@@ -42,7 +63,7 @@ public class MaListeEpicerieActivity extends AppCompatActivity {
 
 
         GroceryListAdapter adapter = new GroceryListAdapter(this, groceryItemList);
-        groceryListView.setAdapter(adapter);
+        groceryListView.setAdapter(adapter);*/
 
 
         bottomNavigationView.setOnItemSelectedListener(item -> {

@@ -93,15 +93,7 @@ public class RechercheRecetteActivity extends AppCompatActivity {
             }
         });
 
-        /*recipesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
-        recetteAdapter = new RecetteAdapter(this);
-        recipesRecyclerView.setAdapter(recetteAdapter);
-
-        viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(PlanigoViewModel.class);
-
-        loadRecipes();*/
-
-        //Notifier le view model pour aller aller chercher la liste des recettes en fonction des nouveaux critères
+        //Notifier le view model pour aller aller chercher la liste des recettes en fonction des nouveaux critères (Type et Restriction)
         filterTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -167,50 +159,4 @@ public class RechercheRecetteActivity extends AppCompatActivity {
             return false;
         });
     }
-/*
-    private void loadRecipes() {
-        viewModel.chargerRecettes();
-        viewModel.getRecettes().observe(this, recettes -> {
-            if (recettes != null) {
-                recetteAdapter.setRecettes(recettes);
-                resultatsDeRechercheTextView.setText(getString(R.string.resultats_de_recherche) + " (" + recettes.size() + ")");
-            } else {
-                resultatsDeRechercheTextView.setText(getString(R.string.resultats_de_recherche) + " (0)");
-                Toast.makeText(this, "Erreur lors du chargement des recettes", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String selectedFilter = parent.getItemAtPosition(position).toString();
-        int spinnerId = parent.getId();
-
-        if (spinnerId == R.id.filterTypeSpinner) {
-            viewModel.setCategoryFilter(selectedFilter);
-        } else if (spinnerId == R.id.filterRestrictionSpinner) {
-            viewModel.setIngredientFilter(selectedFilter);
-        }
-
-        loadRecipes();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-        viewModel.setSearchTextFilter(s.toString());
-        loadRecipes();
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-    }*/
 }

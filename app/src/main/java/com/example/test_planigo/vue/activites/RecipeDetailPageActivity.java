@@ -1,7 +1,10 @@
 package com.example.test_planigo.vue.activites;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -47,10 +50,6 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
         setContentView(R.layout.popup_recipe_detail);
 
         viewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication())).get(RecetteViewModel.class);
-
-        /*imageRecette;
-    private TextView recipeNameDetailTextView, recipeTimeTextView, recipeDifficultyTextView, recipePortionTextView, recipeTypeTextView, createurRecetteTextView, descriptionRecetteTextView;
-    private ListView listeRestrictions, listeIngredients, listeEtapes;*/
 
         //Créer les composants
         imageRecette = findViewById(R.id.recipeDetailImageView);
@@ -101,6 +100,35 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
             listeEtapes.setAdapter(etapeAdapter);
             listeIngredients.setAdapter(itemProduitAdapter);
 
+            //Afficher l'image
+            String base64Image = recette.getImage();
+
+            if (base64Image != null && !base64Image.isEmpty()) {
+                try {
+                    // Supprimer le préfixe si présent (facultatif, selon ton backend)
+                    if (base64Image.startsWith("data:")) {
+                        base64Image = base64Image.substring(base64Image.indexOf(",") + 1);
+                    }
+
+                    // Décoder le Base64
+                    byte[] imageBytes = Base64.decode(base64Image, Base64.DEFAULT);
+
+                    // Convertir en Bitmap
+                    Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+
+                    // Afficher dans l'ImageView
+                    imageRecette.setImageBitmap(decodedImage);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    // En cas d'erreur, tu peux afficher une image par défaut
+                    imageRecette.setImageResource(R.drawable.planigologo);
+                }
+            } else {
+                // Image vide ou nulle → image par défaut
+                imageRecette.setImageResource(R.drawable.planigologo);
+            }
+
         });
 
 
@@ -134,41 +162,6 @@ public class RecipeDetailPageActivity extends AppCompatActivity implements View.
         });
     }
 
-    /*private void populateRecipeDetails(Recette recipe) {
-        recipeNameDetailTextView.setText(recipe.getNom());
-        recipeTimeTextView.setText(recipe.getTemps_de_cuisson() + " minutes");
-        recipeDifficultyTextView.setText("Facile");
-        recipePortionTextView.setText("3 portions");
-        Picasso.get()
-                .load(recipe.getImage())
-                .placeholder(R.drawable.planigologo)
-                .error(R.drawable.planigologo)
-                .into(recipeDetailImageView);
-
-        ingredientsListContainer.removeAllViews();
-        for (String ingredientName : recipe.getIngredients()) {
-            View ingredientItemView = getLayoutInflater().inflate(R.layout.list_item_recipe_detail, ingredientsListContainer, false);
-            TextView ingredientNameTextView = ingredientItemView.findViewById(R.id.ingredientNameTextView);
-            ingredientNameTextView.setText(ingredientName);
-             ingredientsListContainer.addView(ingredientItemView);
-        }
-
-        etapesListContainer.removeAllViews();
-        List<String> steps = recipe.getEtapes();
-
-        int stepNumber = 1;
-        for (String stepText : steps) {
-            TextView stepTextView = new TextView(this);
-            stepTextView.setText(stepNumber + ". " + stepText);
-            stepTextView.setTextColor(ContextCompat.getColor(this, R.color.black_text));
-            stepTextView.setTextSize(16);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            params.setMargins(0, 0, 0, 16);
-            stepTextView.setLayoutParams(params);
-            etapesListContainer.addView(stepTextView);
-            stepNumber++;
-        }
-    }*/
 
     @Override
     public void onClick(View v) {

@@ -56,6 +56,10 @@ public class StockageViewModel extends AndroidViewModel {
         stockageRepository.chargerListeIngredient();
     }
 
+    public void chargerListeEpicerie(){
+        stockageRepository.chargerListeEpicerie();
+    }
+
     public void deleteProduit(Produit produit){
         stockageRepository.deleteProduit(produit);
     }
@@ -68,8 +72,8 @@ public class StockageViewModel extends AndroidViewModel {
         stockageRepository.ajouterProduit(produit);
     }
 
-    /*Transition vers une autre Activity*/
 
+    /*Transition vers une autre Activity*/
     public LiveData<Produit> getAllerPopupProduit(){
         return allerPopupProduit;
     }

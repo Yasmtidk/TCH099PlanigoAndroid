@@ -126,7 +126,6 @@ public class StockageRepository {
         (new Thread(){
             public void run(){
                 try{
-                    Log.d("DEBUG_TAG", "Passage dans chargerListeIngredient");
                     //Envoyer la requete et récupéré la réponse
                     Request postRequete = new Request.Builder()
                             .url(URL_POINT_ENTREE + "stockage.php/recuperer-ingredient/")
@@ -161,6 +160,15 @@ public class StockageRepository {
         }).start();
     }
 
+    /**
+     * Récupéré tout les produits de la liste d'épicerie.
+     * En cas de succès: listeProduit est modifier par la liste des produits récupéré
+     * En cas d'echec: resultatErreurAPILiveData est modifer par un string coorespondant au message d'erreur
+     */
+    public void chargerListeEpicerie(){
+
+    }
+
     /** Supprimer le produit donné en paramètre du stockage du client actuel dans la base de donné
      * @param produit L'objet Produit à supprimer de la base de donné
      * En cas de succès: resultatErreurAPILiveData renvoie true
@@ -170,7 +178,6 @@ public class StockageRepository {
         (new Thread(){
             public void run(){
                 try{
-                    Log.d("DEBUG_TAG", "Passage dans la suppression du produit");
                     //préparer l'objet (information nécessaire pour la route)
                     JSONObject postObj = new JSONObject();
                     postObj.put("identifiant", ClientActuel.getClientConnecter().getNom_utilisateur());
@@ -219,7 +226,6 @@ public class StockageRepository {
         (new Thread(){
             public void run(){
                 try{
-                    Log.d("DEBUG_TAG", "passage dans ajouterProduit");
                     /*Récupéré l'id du produit rechercher*/
 
                     //Envoyer la requete et récupéré la réponse
@@ -239,7 +245,7 @@ public class StockageRepository {
                     }else if(statutRequete.equals("success")){
 
                         /*Maintenant qu'on a l'id du produit, l'ajouter aux stockage du client actuel*/
-                        Log.d("DEBUG_TAG", "passage dans ajouterProduit voici l'id : ");
+
                         //préparer l'objet (information nécessaire pour la route)
                         JSONObject postObj = new JSONObject();
                         postObj.put("identifiant", ClientActuel.getClientConnecter().getNom_utilisateur());

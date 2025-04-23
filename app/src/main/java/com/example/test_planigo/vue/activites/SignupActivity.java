@@ -46,6 +46,7 @@ public class SignupActivity extends AppCompatActivity {
         buttonSignInFromSignUp = findViewById(R.id.buttonSignInFromSignUp);
         msgErreur = findViewById(R.id.msgErreurSigup);
 
+        //Si la réponse est un boolean true, la connection a été réussit, sinon si c'est un String on affiche le message d'erreur
         viewModel.getConnexion().observe(this, reponseInscription -> {
             if (reponseInscription instanceof Boolean) {
                 Boolean inscriptionReussie = (Boolean) reponseInscription;
@@ -56,11 +57,11 @@ public class SignupActivity extends AppCompatActivity {
             } else if (reponseInscription instanceof String) {
                 String messageErreur = (String) reponseInscription;
                 msgErreur.setText(messageErreur);
-                //Toast.makeText(SignupActivity.this, messageErreur, Toast.LENGTH_LONG).show();
             }
         });
 
 
+        //Vérifier si tout les champs sont remplis, puis envoie la requête d'inscription du nouveau client
         buttonSignUp.setOnClickListener(v -> {
             String nomUtilisateur = editTextNomUtilisateur.getText().toString();
             String motDePasse = editTextPasswordSignup.getText().toString();
@@ -71,13 +72,11 @@ public class SignupActivity extends AppCompatActivity {
 
 
             if (nomUtilisateur.isEmpty() || motDePasse.isEmpty() || confirmerMotDePasse.isEmpty() || prenom.isEmpty() || nom.isEmpty()) {
-                //Toast.makeText(SignupActivity.this, "Veuillez remplir tous les champs !", Toast.LENGTH_LONG).show();
                 msgErreur.setText("Veuillez remplir tous les champs !");
                 return;
             }
 
             if (!motDePasse.equals(confirmerMotDePasse)) {
-                //Toast.makeText(SignupActivity.this, "Les mots de passe ne correspondent pas.", Toast.LENGTH_LONG).show();
                 msgErreur.setText("Les mots de passe ne correspondent pas.");
                 return;
             }

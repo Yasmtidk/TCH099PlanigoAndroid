@@ -1,8 +1,6 @@
 package com.example.test_planigo.modeles.entitees;
 
 public class Client {
-
-    //private int id;
     private String nom;
     private String prenom;
     private String nom_utilisateur;
@@ -12,20 +10,11 @@ public class Client {
     }
 
     public Client(String nom, String prenom, String nom_utilisateur, String mot_de_passe) {
-        //this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.nom_utilisateur = nom_utilisateur;
         this.mot_de_passe = mot_de_passe;
     }
-
-    /*public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }*/
 
     public String getNom() {
         return nom;

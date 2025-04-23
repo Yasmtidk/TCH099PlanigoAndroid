@@ -46,17 +46,23 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/ma_liste_epicerie"
+                android:textColor="@color/black_text"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/groceryListView"
                 android:layout_width="match_parent"
-                android:layout_height="660dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
                 android:clipToPadding="false"
-                android:divider="@null"
-                android:dividerHeight="0dp"
-                android:paddingHorizontal="16dp"
-                android:paddingTop="16dp" />
+                android:paddingBottom="80dp"/>
         </LinearLayout>
     </ScrollView>
 

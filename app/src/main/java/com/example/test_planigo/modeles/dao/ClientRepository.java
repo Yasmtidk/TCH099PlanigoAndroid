@@ -40,30 +40,21 @@ public class ClientRepository {
      * Modifie connexionLiveData à true si c'Est un succès ou envoie un string s'il y a une erreur
      * @param client Le client à rojouter dans la base de donné
      */
-
     public void postNouveauClient(Client client) throws JSONException {
 
         (new Thread() {
             @Override
             public void run() {
 
-                //vérifier que le nom d'utilisateur (identifiant) est unique
                 try{
-                    Log.d("DEBUG_TAG", "Passage dans postNouveauClient");
+                    //préparer l'objet (information nécessaire pour la route)
                     JSONObject postObj = new JSONObject();
-
                     postObj.put("identifiant", client.getNom_utilisateur());
-                    Log.d("DEBUG_TAG", "Passage dans getNom_utilisateur" + client.getNom_utilisateur());
-
                     postObj.put("motDePasse", client.getMot_de_passe());
-                    Log.d("DEBUG_TAG", "Passage dans getMot_de_passe" + client.getMot_de_passe());
-
                     postObj.put("nom", client.getNom());
-                    Log.d("DEBUG_TAG", "Passage dans getNom" + client.getNom());
-
                     postObj.put("prenom", client.getPrenom());
-                    Log.d("DEBUG_TAG", "Passage dans getPrenom" + client.getPrenom());
 
+                    //Envoyer la requete et récupéré la réponse
                     RequestBody corpsPostRequete = RequestBody.create(postObj.toString(), JSON);
                     Request postRequete = new Request.Builder()
                             .url(URL_POINT_ENTREE + "inscription.php/inscrire/")
@@ -75,7 +66,7 @@ public class ClientRepository {
                     String statutRequete = new JSONObject(stringResponce).getString("statut");
 
                     //Si le nom d'utilisateur est déjà présent (identifiant) ou tout autre erreur en lien avec le mot de passe : affiche erreur
-                    //Sinon, afficher un message de succès
+                    //Sinon, on renvoie true
                     if(statutRequete.equals("error")){
                         String messageRequete = new JSONObject(stringResponce).getString("message");
                         connexionLiveData.postValue(messageRequete);
@@ -104,10 +95,12 @@ public class ClientRepository {
             public void run() {
 
                 try{
+                    //préparer l'objet (information nécessaire pour la route)
                     JSONObject postObj = new JSONObject();
                     postObj.put("identifiant", nomUtilisateur);
                     postObj.put("motDePasse", motDePasse);
 
+                    //Envoyer la requete et récupéré la réponse
                     RequestBody corpsPostRequete = RequestBody.create(postObj.toString(), JSON);
                     Request postRequete = new Request.Builder()
                             .url(URL_POINT_ENTREE + "login.php/login/")
@@ -118,6 +111,7 @@ public class ClientRepository {
                     String stringResponce = responseBody.string();
                     String statutRequete = new JSONObject(stringResponce).getString("statut");
 
+                    //Afficher le message d'erreur ou créer le client selon le statut de la reponse
                     if(statutRequete.equals("error")){
                         String messageRequete = new JSONObject(stringResponce).getString("message");
                         connexionLiveData.postValue(messageRequete);

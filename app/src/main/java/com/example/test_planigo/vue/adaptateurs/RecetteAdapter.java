@@ -1,5 +1,8 @@
 package com.example.test_planigo.vue.adaptateurs;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,11 +49,35 @@ public class RecetteAdapter extends RecyclerView.Adapter<RecetteAdapter.RecetteV
             holder.recetteListeNom.setText(recetteAbrege.getNom());
             holder.recetteListeType.setText(recetteAbrege.getType());
             holder.recetteListeTempsPreparation.setText(recetteAbrege.getTemps_de_cuisson() + " minutes");
-            Picasso.get()
-                    .load(recetteAbrege.getImage())
-                    .placeholder(R.drawable.planigologo)
-                    .error(R.drawable.planigologo)
-                    .into(holder.recetteListeImage);
+
+            //Afficher l'image
+            String base64Image = recetteAbrege.getImage();
+
+            if (base64Image != null && !base64Image.isEmpty()) {
+                try {
+                    // Supprimer le préfixe si présent (facultatif, selon ton backend)
+                    if (base64Image.startsWith("data:")) {
+                        base64Image = base64Image.substring(base64Image.indexOf(",") + 1);
+                    }
+
+                    // Décoder le Base64
+                    byte[] imageBytes = Base64.decode(base64Image, Base64.DEFAULT);
+
+                    // Convertir en Bitmap
+                    Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+
+                    // Afficher dans l'ImageView
+                    holder.recetteListeImage.setImageBitmap(decodedImage);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    // En cas d'erreur, tu peux afficher une image par défaut
+                    holder.recetteListeImage.setImageResource(R.drawable.planigologo);
+                }
+            } else {
+                // Image vide ou nulle → image par défaut
+                holder.recetteListeImage.setImageResource(R.drawable.planigologo);
+            }
 
             // Appelle le callback pour informer l'Activity
             holder.itemView.setOnClickListener(v -> onItemClick.accept(recetteAbrege));

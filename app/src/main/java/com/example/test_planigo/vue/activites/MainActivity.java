@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSignIn = findViewById(R.id.buttonSignIn);
         buttonCreateAccount = findViewById(R.id.buttonCreateAccount);
 
+        //Aller à la page d'acceuil si la réponse est un client, sinon affiche un message d'erreur
         viewModel.getConnexion().observe(this, reponseConnexion -> {
             if (reponseConnexion instanceof Client) {
                 Client clientConnecte = (Client) reponseConnexion;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        //Vérifier que tout les champs sont remplie avant d'envoyer une demande de connaction
         buttonSignIn.setOnClickListener(v -> {
             String nomUtilisateur = editTextNomUtilisateur.getText().toString();
             String motDePasse = editTextPassword.getText().toString();
@@ -67,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Aller à la page de création du compte si composant cliquer.
         buttonCreateAccount.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, SignupActivity.class);
             startActivity(intent);
