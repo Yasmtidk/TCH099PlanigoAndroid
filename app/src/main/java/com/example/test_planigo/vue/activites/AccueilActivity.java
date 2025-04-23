@@ -2,82 +2,76 @@ package com.example.test_planigo.vue.activites;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.test_planigo.R;
+import com.example.test_planigo.modeles.entitees.AccueilNavigationItem;
+import com.example.test_planigo.vue.adaptateurs.AccueilAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class AccueilActivity extends AppCompatActivity implements View.OnClickListener {
+import java.util.ArrayList;
+import java.util.List;
 
-    private LinearLayout modifierMonStockCard;
-    private LinearLayout rechercheDeRecettesCard;
-    private LinearLayout listeDeMesRecettesCard;
+public class AccueilActivity extends AppCompatActivity {
+
+    private RecyclerView accueilRecyclerView;
+    private AccueilAdapter accueilAdapter;
+    private List<AccueilNavigationItem> navigationItems;
     private BottomNavigationView bottomNavigationView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accueil_page);
 
-        modifierMonStockCard = findViewById(R.id.modifier_mon_stock_card);
-        rechercheDeRecettesCard = findViewById(R.id.recherche_de_recettes_card);
-        listeDeMesRecettesCard = findViewById(R.id.liste_de_mes_recettes_card);
+        accueilRecyclerView = findViewById(R.id.accueilRecyclerView);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
+        prepareNavigationItems();
+        setupRecyclerView();
+        setupBottomNavigationListener();
+    }
 
-        rechercheDeRecettesCard.setOnClickListener(this);
-        listeDeMesRecettesCard.setOnClickListener(this);
+    // Prépare la liste des éléments pour la grille
+    private void prepareNavigationItems() {
+        navigationItems = new ArrayList<>();
+        navigationItems.add(new AccueilNavigationItem("Découvrir Recettes", R.drawable.recipe_book, RechercheRecetteActivity.class));
+        navigationItems.add(new AccueilNavigationItem("Mes Recettes", R.drawable.myyyy_recipe, MaListeRecettesActivity.class));
+        navigationItems.add(new AccueilNavigationItem("Planificateur", R.drawable.weekplanner, WeeklyPlannerActivity.class));
+        navigationItems.add(new AccueilNavigationItem("Mon Stock", R.drawable.mon_stock, MonStockIngredientsActivity.class));
+        navigationItems.add(new AccueilNavigationItem("Mon Profil", R.drawable.usernavigation, ProfileActivity.class));
+    }
 
-         bottomNavigationView.setOnItemSelectedListener(item -> {
+    // Configure le RecyclerView
+    private void setupRecyclerView() {
+        accueilAdapter = new AccueilAdapter(this, navigationItems);
+        accueilRecyclerView.setAdapter(accueilAdapter);
+        accueilRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    // Configure la barre de navigation
+    private void setupBottomNavigationListener() {
+        bottomNavigationView.setSelectedItemId(R.id.nav_accueil);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_accueil) {
-                 bottomNavigationView.setSelectedItemId(R.id.nav_accueil);
-                 return true;
+                return false;
+            }
 
-            } else if (id == R.id.nav_stock) {
-                Intent intent = new Intent(AccueilActivity.this, MonStockIngredientsActivity.class);
-                startActivity(intent);
-                return true;
+            Intent intent = null;
+            if (id == R.id.nav_stock) intent = new Intent(this, MonStockIngredientsActivity.class);
+            else if (id == R.id.nav_recettes) intent = new Intent(this, RechercheRecetteActivity.class);
+            else if (id == R.id.nav_planner) intent = new Intent(this, WeeklyPlannerActivity.class);
+            else if (id == R.id.nav_profile) intent = new Intent(this, ProfileActivity.class);
 
-            } else if (id == R.id.nav_recettes) {
-                Intent intent = new Intent(AccueilActivity.this, RechercheRecetteActivity.class);
-                startActivity(intent);
-                return true;
-
-            } else if (id == R.id.nav_planner) {
-                Intent intent = new Intent(AccueilActivity.this, WeeklyPlannerActivity.class);
-                startActivity(intent);
-                return true;
-
-            } else if (id == R.id.nav_profile) {
-                Intent intent = new Intent(AccueilActivity.this, ProfileActivity.class);
+            if (intent != null) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivity(intent);
                 return true;
             }
-             return false;
+            return false;
         });
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        Intent intent;
-        int id = v.getId();
-        if (id == R.id.modifier_mon_stock_card) {
-            intent = new Intent(AccueilActivity.this, MonStockIngredientsActivity.class);
-            startActivity(intent);
-
-        } else if (id == R.id.recherche_de_recettes_card) {
-            intent = new Intent(AccueilActivity.this, RechercheRecetteActivity.class);
-            startActivity(intent);
-
-        } else if (id == R.id.liste_de_mes_recettes_card) {
-            intent = new Intent(AccueilActivity.this, RechercheRecetteActivity.class);
-            startActivity(intent);
-        }
     }
 }

@@ -30,7 +30,7 @@ public class MaListeRecettesActivity extends AppCompatActivity {
     private String slotKeyToUpdate = null;
 
     // Simulation: Liste statique des recettes sauvegardées (only temporary for now)
-    private static List<RecetteAbrege> savedRecipesList = new ArrayList<>();
+    static List<RecetteAbrege> savedRecipesList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

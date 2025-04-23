@@ -1,6 +1,7 @@
 package com.example.test_planigo.vue.activites;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -95,7 +96,8 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         buttonSignInFromSignUp.setOnClickListener(v -> {
-            finish();
+            Intent intent = new Intent(SignupActivity.this, ConnectionActivity.class);
+            startActivity(intent);
         });
     }
 }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -52,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_marginBottom="24dp">
+                android:layout_marginBottom="16dp">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -76,224 +77,146 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="24dp">
 
                 <ImageView
                     android:id="@+id/editProfileImageView"
-                    android:layout_width="172dp"
+                    android:layout_width="120dp"
                     android:layout_height="120dp"
+                    android:scaleType="centerCrop"
                     android:contentDescription="@string/profile"
-                    android:src="@drawable/userpfp" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/pencil"
-                    android:contentDescription="@string/edit_profile"
-                    app:tint="@color/secondary_color"
-                    android:layout_gravity="bottom|end"
-                     android:layout_marginEnd="8dp"/>
+                    tools:srcCompat="@drawable/userpfp" />
             </FrameLayout>
 
-
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/white_rounded_background"
-                android:padding="16dp">
+                style="@style/EditProfileRowStyle">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    style="@style/EditProfileIconStyle"
                     android:src="@drawable/nom"
-                    android:contentDescription="@string/nom"
-                    app:tint="@color/secondary_color"
-                    android:layout_marginEnd="8dp"/>
+                    android:contentDescription="@string/nom" />
+
+                <TextView
+                    style="@style/EditProfileLabelStyle"
+                    android:text="Nom"/>
 
                 <TextView
                     android:id="@+id/nomTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Doe"
-                    android:textSize="16sp"
-                    android:textColor="@color/black_text"/>
+                    style="@style/EditProfileValueStyle"
+                    tools:text="Doe"/>
 
                 <ImageView
                     android:id="@+id/editNomButton"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/pencil"
-                    android:contentDescription="@string/edit_profile"
-                    app:tint="@color/secondary_color"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground"/>
+                    style="@style/EditProfilePencilStyle"/>
+
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/white_rounded_background"
-                android:padding="16dp">
+                style="@style/EditProfileRowStyle">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    style="@style/EditProfileIconStyle"
                     android:src="@drawable/nom"
-                    android:contentDescription="@string/prenom"
-                    app:tint="@color/secondary_color"
-                    android:layout_marginEnd="8dp"/>
+                    android:contentDescription="@string/prenom" />
+
+                <TextView
+                    style="@style/EditProfileLabelStyle"
+                    android:text="Prénom"/>
 
                 <TextView
                     android:id="@+id/prenomTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="John"
-                    android:textSize="16sp"
-                    android:textColor="@color/black_text"/>
+                    style="@style/EditProfileValueStyle"
+                    tools:text="John"/>
 
                 <ImageView
                     android:id="@+id/editPrenomButton"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/pencil"
-                    android:contentDescription="@string/edit_profile"
-                    app:tint="@color/secondary_color"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground"/>
+                    style="@style/EditProfilePencilStyle"/>
+
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/white_rounded_background"
-                android:padding="16dp">
+                style="@style/EditProfileRowStyle">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    style="@style/EditProfileIconStyle"
                     android:src="@drawable/age"
-                    android:contentDescription="@string/age_label"
-                    app:tint="@color/secondary_color"
-                    android:layout_marginEnd="8dp"/>
+                    android:contentDescription="@string/age_label"/>
+
+                <TextView
+                    style="@style/EditProfileLabelStyle"
+                    android:text="Âge"/>
 
                 <TextView
                     android:id="@+id/ageTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="28"
-                    android:textSize="16sp"
-                    android:textColor="@color/black_text"/>
+                    style="@style/EditProfileValueStyle"
+                    tools:text="28"/>
 
                 <ImageView
                     android:id="@+id/editAgeButton"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/pencil"
-                    android:contentDescription="@string/edit_profile"
-                    app:tint="@color/secondary_color"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground"/>
+                    style="@style/EditProfilePencilStyle"/>
+
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/white_rounded_background"
-                android:padding="16dp">
+                style="@style/EditProfileRowStyle">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    style="@style/EditProfileIconStyle"
                     android:src="@drawable/gender"
-                    android:contentDescription="@string/genre_label"
-                    app:tint="@color/secondary_color"
-                    android:layout_marginEnd="8dp"/>
+                    android:contentDescription="@string/genre_label"/>
+
+                <TextView
+                    style="@style/EditProfileLabelStyle"
+                    android:text="Genre"/>
 
                 <TextView
                     android:id="@+id/genreTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Male"
-                    android:textSize="16sp"
-                    android:textColor="@color/black_text"/>
+                    style="@style/EditProfileValueStyle"
+                    tools:text="Homme"/>
 
                 <ImageView
                     android:id="@+id/editGenreButton"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/pencil"
-                    android:contentDescription="@string/edit_profile"
-                    app:tint="@color/secondary_color"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:background="?android:attr/selectableItemBackground"/>
+                    style="@style/EditProfilePencilStyle"/>
+
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/white_rounded_background"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:padding="16dp">
+                style="@style/EditProfileRowStyle">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginEnd="8dp"
-                    android:contentDescription="@string/confidentialite_label"
-                    android:src="@drawable/privacyyuser"
-                    app:tint="@color/secondary_color" />
+                    style="@style/EditProfileIconStyle"
+                    android:src="@drawable/info"
+                    android:contentDescription="Description"/>
 
                 <TextView
-                    android:id="@+id/confidentialiteTextView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Public"
-                    android:textColor="@color/black_text"
-                    android:textSize="16sp" />
+                    style="@style/EditProfileLabelStyle"
+                    android:text="Bio"/>
+
+                <TextView
+                    android:id="@+id/descriptionTextView"
+                    style="@style/EditProfileValueStyle"
+                    tools:text="Passionné de cuisine..."
+                    android:maxLines="3"
+                    android:ellipsize="end"/>
 
                 <ImageView
-                    android:id="@+id/editConfidentialiteButton"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:contentDescription="@string/edit_profile"
-                    android:focusable="true"
-                    android:src="@drawable/pencil"
-                    app:tint="@color/secondary_color" />
+                    android:id="@+id/editDescriptionButton"
+                    style="@style/EditProfilePencilStyle"/>
+
             </LinearLayout>
 
             <Button
                 android:id="@+id/saveButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
                 android:backgroundTint="@color/secondary_color"
                 android:text="@string/sauvegarder"
                 android:textColor="@color/white"
-                android:layout_marginBottom="32dp"/>
+                android:paddingVertical="12dp"
+                android:textSize="16sp"
+                app:cornerRadius="24dp"
+                android:layout_marginBottom="16dp"/>
 
         </LinearLayout>
     </ScrollView>

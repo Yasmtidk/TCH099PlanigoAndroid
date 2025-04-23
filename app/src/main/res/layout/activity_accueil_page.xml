@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -14,14 +15,12 @@
         android:paddingVertical="12dp"
         android:paddingHorizontal="16dp"
         android:background="@color/principal_color">
-
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:contentDescription="@string/page_d_accueil"
             android:src="@drawable/home"
             app:tint="@color/white" />
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -32,140 +31,18 @@
             android:textStyle="bold"
             android:gravity="start"
             android:layout_marginStart="16dp"/>
-
     </LinearLayout>
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/accueilRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:paddingHorizontal="16dp"
+        android:padding="8dp"
         android:clipToPadding="false"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
-
-            <LinearLayout
-                android:id="@+id/modifier_mon_stock_card"
-                android:layout_width="match_parent"
-                android:layout_height="226dp"
-                android:layout_marginBottom="24dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="190dp"
-                    android:contentDescription="@string/modifier_mon_stock"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/modifier_mon_stock_image" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="-75dp"
-                    android:background="#80000000"
-                    android:gravity="center"
-                    android:padding="16dp"
-                    android:text="@string/modifier_mon_stock"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="bottom|end"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:contentDescription="@string/arrow_icon"
-                    android:src="@drawable/arrow_or" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/recherche_de_recettes_card"
-                android:layout_width="match_parent"
-                android:layout_height="227dp"
-                android:layout_marginBottom="24dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="190dp"
-                    android:contentDescription="@string/recherche_de_recettes"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/recherche_de_recettes_image" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="-75dp"
-                    android:background="#80000000"
-                    android:gravity="center"
-                    android:padding="16dp"
-                    android:text="@string/recherche_de_recettes"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="bottom|end"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:contentDescription="@string/arrow_icon"
-                    android:src="@drawable/arrow_or" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/liste_de_mes_recettes_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="24dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="190dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/liste_de_mes_recettes_image"
-                    android:contentDescription="@string/liste_de_mes_recettes" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/liste_de_mes_recettes"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:padding="16dp"
-                    android:layout_marginTop="-75dp" android:background="#80000000"/>
-
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/arrow_or"
-                    android:contentDescription="@string/arrow_icon"
-                    android:layout_gravity="bottom|end"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginEnd="16dp"/>
-            </LinearLayout>
-
-        </LinearLayout>
-    </ScrollView>
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2"
+        tools:listitem="@layout/item_accueil_card"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

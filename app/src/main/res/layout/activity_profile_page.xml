@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -48,39 +49,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="16dp">
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="24dp">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/info"
-                    android:contentDescription="@string/a_propos_de_vous"
-                    app:tint="@color/principal_color"
-                    android:layout_marginEnd="8dp"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/a_propos_de_vous"
-                    android:textSize="18sp"
-                    android:textColor="@color/principal_color"
-                    android:textStyle="bold"/>
-            </LinearLayout>
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <ImageView
                 android:id="@+id/profileImageView"
@@ -88,196 +64,64 @@
                 android:layout_height="120dp"
                 android:contentDescription="@string/profile"
                 android:src="@drawable/userpfp"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="12dp"/>
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/userNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="20dp">
+                tools:text="Prénom Nom"
+                android:textColor="@color/black_text"
+                android:textSize="22sp"
+                android:layout_marginBottom="5dp"/>
 
-                <TextView
-                    android:id="@+id/userNameTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:textColor="@color/black_text"
-                    android:textSize="22sp"
-                    android:layout_marginEnd="8dp"/>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/mes_recettes_button"
+            <TextView
+                android:id="@+id/userBioTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:paddingStart="32dp"
-                android:paddingEnd="16dp"
-                android:paddingVertical="12dp"
-                android:background="@drawable/secondary_color_rounded_button"
-                android:clickable="true"
-                android:focusable="true">
+                android:layout_marginBottom="28dp"
+                android:text="Description"
+                android:textAlignment="center"
+                android:textColor="@color/principal_color"
+                android:textSize="18sp" />
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/myyyy_recipe"
-                    android:contentDescription="@string/mes_recettes"
-                    android:layout_marginEnd="16dp"
-                    app:tint="@color/white"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/mes_recettes"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"/>
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/arrow_right"
-                    android:contentDescription="@string/mes_recettes"
-                    app:tint="@color/white"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/mon_stock_ingredients_button"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingStart="32dp"
-                android:paddingEnd="16dp"
-                android:paddingVertical="12dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/secondary_color_rounded_button"
-                android:clickable="true"
-                android:focusable="true">
+                android:text="Mes Créations"
+                android:textSize="18sp"
+                android:textColor="@color/principal_color"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/monstock_epicerie"
-                    android:contentDescription="@string/mon_stock_ingredients"
-                    android:layout_marginEnd="16dp"
-                    app:tint="@color/white"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/mon_stock_ingredients"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"/>
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/arrow_right"
-                    android:contentDescription="@string/mon_stock_ingredients"
-                    app:tint="@color/white"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ma_liste_epicerie_button"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/userRecipesRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingStart="32dp"
-                android:paddingEnd="16dp"
-                android:paddingVertical="12dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/secondary_color_rounded_button"
-                android:clickable="true"
-                android:focusable="true">
+                android:layout_height="400dp"
+                android:nestedScrollingEnabled="false"
+                android:paddingBottom="16dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:listitem="@layout/item_recipe_card" />
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/grocery_cart"
-                    android:contentDescription="@string/ma_liste_epicerie"
-                    android:layout_marginEnd="16dp"
-                    app:tint="@color/white"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ma_liste_epicerie"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"/>
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/arrow_right"
-                    android:contentDescription="@string/ma_liste_epicerie"
-                    app:tint="@color/white"/>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/mon_plan_de_semaine_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingStart="32dp"
-                android:paddingEnd="16dp"
-                android:paddingVertical="12dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="32dp"
-                android:background="@drawable/secondary_color_rounded_button"
-                android:clickable="true"
-                android:focusable="true">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/weekplanner"
-                    android:contentDescription="@string/mon_plan_de_semaine"
-                    android:layout_marginEnd="16dp"
-                    app:tint="@color/white"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/mon_plan_de_semaine"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"/>
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/arrow_right"
-                    android:contentDescription="@string/mon_plan_de_semaine"
-                    app:tint="@color/white"/>
-            </LinearLayout>
 
             <Button
                 android:id="@+id/deconnecterButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="24dp"
                 android:backgroundTint="@color/white"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:paddingVertical="12dp"
                 android:text="@string/deconnecter"
+                android:textAllCaps="false"
                 android:textColor="@color/principal_color"
                 android:textSize="16sp"
-                android:paddingVertical="12dp"
-                android:textAllCaps="false"
                 app:cornerRadius="24dp"
-                android:foreground="?android:attr/selectableItemBackground"/>
-
+                app:strokeColor="@color/principal_color"
+                app:strokeWidth="1dp" />
 
         </LinearLayout>
     </ScrollView>
