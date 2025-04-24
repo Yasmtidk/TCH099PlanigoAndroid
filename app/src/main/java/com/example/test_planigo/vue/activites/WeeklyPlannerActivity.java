@@ -111,18 +111,7 @@ public class WeeklyPlannerActivity extends AppCompatActivity {
 
     // Simulation: Chargement / Initialisation
     private void loadOrInitializePlanner() {
-        if (currentPlan.isEmpty()) {
-            Log.d("Planner", "Initialisation du plan avec données factices.");
-            RecetteAbrege recette1 = new RecetteAbrege(1, "Salade César", 15, "Dîner", "URL1");
-            RecetteAbrege recette2 = new RecetteAbrege(2, "Spaghetti Bolo", 30, "Plat principal", "URL2");
-            RecetteAbrege recette3 = new RecetteAbrege(3, "Soupe Oignon", 45, "Entrée", "URL3");
-            currentPlan.put("Lundi_0", recette1);
-            currentPlan.put("Lundi_1", recette2);
-            currentPlan.put("Mardi_0", recette3);
-            currentPlan.put("Mardi_2", recette1);
-        } else {
-            Log.d("Planner", "Chargement du plan existant (statique). Size: " + currentPlan.size());
-        }
+
         populateAllCards();
     }
 
@@ -196,7 +185,7 @@ public class WeeklyPlannerActivity extends AppCompatActivity {
             imageView.setPadding(16, 16, 16, 16);
 
             cardRootView.setOnClickListener(v -> {
-                Intent intent = new Intent(WeeklyPlannerActivity.this, MaListeRecettesActivity.class);
+                Intent intent = new Intent(WeeklyPlannerActivity.this, RechercheRecetteActivity.class);
                 intent.putExtra("SELECTION_MODE", true);
                 intent.putExtra("SLOT_KEY", slotKey);
                 Log.d("Planner", "Lancement sélection pour slot: " + slotKey);

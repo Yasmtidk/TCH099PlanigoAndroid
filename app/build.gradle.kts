@@ -44,4 +44,5 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
+    implementation ("androidx.core:core-splashscreen:1.0.0")
 }

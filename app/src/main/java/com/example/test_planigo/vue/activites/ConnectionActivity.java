@@ -44,9 +44,7 @@ public class ConnectionActivity extends AppCompatActivity {
         // Observer le résultat de la tentative de connexion
         // Aller à la page d'accueil si la réponse est un client, sinon afficher un message d'erreur
         viewModel.getConnexion().observe(this, reponseConnexion -> {
-            if (reponseConnexion instanceof Client) {
-                Client clientConnecte = (Client) reponseConnexion;
-                ClientActuel.setClientConnecter(clientConnecte); // Stocker le client connecté globalement
+            if (reponseConnexion instanceof Boolean) {
                 Toast.makeText(ConnectionActivity.this, "Connexion réussie !", Toast.LENGTH_SHORT).show();
                 // Naviguer vers l'accueil
                 Intent intent = new Intent(ConnectionActivity.this, AccueilActivity.class);
