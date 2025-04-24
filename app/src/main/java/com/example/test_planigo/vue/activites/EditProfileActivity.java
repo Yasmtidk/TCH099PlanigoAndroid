@@ -73,16 +73,16 @@ public class EditProfileActivity extends AppCompatActivity {
         }
         nomTextView.setText(currentClient.getNom());
         prenomTextView.setText(currentClient.getPrenom());
-        ageTextView.setText(currentClient.getAge() != null ? String.valueOf(currentClient.getAge()) : "Non défini");
-        genreTextView.setText(currentClient.getGenre() != null ? currentClient.getGenre() : "Non défini");
+        //ageTextView.setText(currentClient.getAge() != null ? String.valueOf(currentClient.getAge()) : "Non défini");
+        //genreTextView.setText(currentClient.getGenre() != null ? currentClient.getGenre() : "Non défini");
         descriptionTextView.setText(currentClient.getDescription() != null ? currentClient.getDescription() : "Aucune description");
 
         // Afficher image existante
-        if (currentClient.getProfileImageUrl() != null && !currentClient.getProfileImageUrl().isEmpty()) {
+        /*if (currentClient.getProfileImageUrl() != null && !currentClient.getProfileImageUrl().isEmpty()) {
             Picasso.get().load(currentClient.getProfileImageUrl()).placeholder(R.drawable.userpfp).error(R.drawable.userpfp).into(profileImageView);
         } else {
             profileImageView.setImageResource(R.drawable.userpfp);
-        }
+        }*/profileImageView.setImageResource(R.drawable.userpfp);
     }
 
     private void setupNavigation() {
@@ -184,7 +184,7 @@ public class EditProfileActivity extends AppCompatActivity {
             updatedClient.setNom(finalNom);
             updatedClient.setPrenom(finalPrenom);
 
-            if (!ageStr.equals("Non défini")) {
+            /*if (!ageStr.equals("Non défini")) {
                 try {
                     updatedClient.setAge(Integer.parseInt(ageStr));
                 } catch (NumberFormatException e) {
@@ -199,7 +199,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 updatedClient.setGenre(finalGenre);
             } else {
                 updatedClient.setGenre(null);
-            }
+            }*/
 
             if (!finalDescription.equals("Aucune description")) {
                 updatedClient.setDescription(finalDescription);
@@ -207,9 +207,9 @@ public class EditProfileActivity extends AppCompatActivity {
                 updatedClient.setDescription(null);
             }
 
-            updatedClient.setProfileImageUrl(currentClient.getProfileImageUrl());
+            //updatedClient.setProfileImageUrl(currentClient.getProfileImageUrl());
 
-            Log.d("EditProfile", "Préparation sauvegarde: " + updatedClient.getNom() + ", Age: " + updatedClient.getAge());
+            Log.d("EditProfile", "Préparation sauvegarde: " + updatedClient.getNom() + ", Age: " );
 
             Toast.makeText(this, "TODO: Appel API pour sauvegarder le profil", Toast.LENGTH_LONG).show();
             // TODO: Remplacer la simulation par un appel réel au ViewModel/Repository

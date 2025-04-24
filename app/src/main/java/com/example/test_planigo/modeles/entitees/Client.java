@@ -1,6 +1,9 @@
 package com.example.test_planigo.modeles.entitees;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 // Pas de commentaire nécessaire pour une classe Entité simple si les noms sont clairs.
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Client {
 
     private String nom;
@@ -8,9 +11,6 @@ public class Client {
     private String nom_utilisateur; // Identifiant unique pour la connexion
     private String mot_de_passe;
     private String description; // Biographie de l'utilisateur
-    private Integer age;
-    private String genre;
-    private String profileImageUrl; // URL de l'image de profil
 
     // Constructeur par défaut (requis par certaines bibliothèques comme Jackson/Firebase)
     public Client() {
@@ -24,9 +24,6 @@ public class Client {
         this.mot_de_passe = mot_de_passe;
         // Les autres champs sont initialisés à null par défaut
         this.description = null;
-        this.age = null;
-        this.genre = null;
-        this.profileImageUrl = null;
     }
 
     // --- Getters ---
@@ -43,9 +40,6 @@ public class Client {
         return mot_de_passe;
     }
     public String getDescription() { return description; }
-    public Integer getAge() { return age; }
-    public String getGenre() { return genre; }
-    public String getProfileImageUrl() { return profileImageUrl; }
 
     // --- Setters ---
     public void setNom(String nom) {
@@ -62,10 +56,4 @@ public class Client {
     }
     public void setDescription(String description) {
         this.description = description; }
-    public void setAge(Integer age) {
-        this.age = age; }
-    public void setGenre(String genre) {
-        this.genre = genre; }
-    public void setProfileImageUrl(String profileImageUrl) {
-        this.profileImageUrl = profileImageUrl; }
 }

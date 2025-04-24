@@ -1,6 +1,7 @@
 package com.example.test_planigo.vue.activites;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -69,11 +70,20 @@ public class RechercheRecetteActivity extends AppCompatActivity {
         recipesRecyclerView.setLayoutManager(new LinearLayoutManager(this)); // Utiliser LinearLayoutManager
         // Initialiser l'adaptateur avec une liste vide et définir le listener de clic
         recetteAdapter = new RecetteAdapter(new ArrayList<>(), itemListe ->{
-            // Action lorsqu'un item de recette est cliqué
-            Intent intent = new Intent(this, RecipeDetailPageActivity.class);
-            intent.putExtra("ID", itemListe.getId()); // Passer l'ID de la recette à l'activité de détail
-            Log.d("RechercheRecette", "ID envoyé : " + itemListe.getId());
-            startActivity(intent);
+             //Configurer l'Action du clik selon la provenance
+            if(getIntent().hasExtra("SLOT_KEY")){
+                //Code pour le retour à la plannification
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("SELECTED_RECIPE", itemListe); // Parcelable
+                resultIntent.putExtra("SLOT_KEY", getIntent().getStringExtra("SLOT_KEY"));
+                setResult(Activity.RESULT_OK, resultIntent);
+                finish();
+            }else{
+                //code pour le la recherche pur et simple de recette: aller consulter le détails de la recette
+                Intent intent = new Intent(this, RecipeDetailPageActivity.class);
+                intent.putExtra("ID", itemListe.getId()); // Passer l'ID de la recette à l'activité de détail
+                startActivity(intent);
+            }
         });
         recipesRecyclerView.setAdapter(recetteAdapter);
 
