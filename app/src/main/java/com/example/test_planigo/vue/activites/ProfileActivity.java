@@ -10,10 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.test_planigo.R;
+import com.example.test_planigo.VueModele.PlanigoViewModel;
+import com.example.test_planigo.VueModele.RecetteViewModel;
+import com.example.test_planigo.VueModele.StockageViewModel;
 import com.example.test_planigo.modeles.entitees.Client;
 import com.example.test_planigo.modeles.singleton.ClientActuel;
 import com.example.test_planigo.vue.adaptateurs.RecetteAdapter;
@@ -21,6 +25,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -32,7 +37,8 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageView profileImageView;
     private RecyclerView userRecipesRecyclerView;
     private RecetteAdapter userRecipeAdapter;
-    // TODO: Ajouter un ViewModel pour gérer le chargement des données profil/recettes user
+    private PlanigoViewModel viewModel;
+    private RecetteViewModel recetteViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +54,11 @@ public class ProfileActivity extends AppCompatActivity {
         profileImageView = findViewById(R.id.profileImageView);
         userRecipesRecyclerView = findViewById(R.id.userRecipesRecyclerView);
 
+        viewModel = new ViewModelProvider(this).get(PlanigoViewModel.class);
+        recetteViewModel = new ViewModelProvider(this).get(RecetteViewModel.class);
+
         loadProfileData();
         setupRecyclerView();
-        loadUserRecipes();
 
         // Listeners
         settingsButton.setOnClickListener(v -> {
@@ -73,20 +81,29 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         loadProfileData();
-
+        recetteViewModel.setListeRecetteAbrege("tout", "miennes");
     }
 
     // Charge et affiche les données du profil actuel
     private void loadProfileData() {
-        Client client = ClientActuel.getClientConnecter();
-        if (client == null) {
+
+        Client verifierClient = ClientActuel.getClientConnecter();
+        if (verifierClient == null) {
             Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
             return;
         }
 
-        nomPrenom.setText(client.getPrenom() + " " + client.getNom());
+        viewModel.getInfoClient().observe(this, client -> {
+            nomPrenom.setText(client.getPrenom() + " " + client.getNom());
+            userBioTextView.setText(client.getDescription());
+            userBioTextView.setVisibility(View.VISIBLE);
+        });
+
+        viewModel.chargerInfoClient(ClientActuel.getClientConnecter().getNom_utilisateur());
+
+        /*nomPrenom.setText(client.getPrenom() + " " + client.getNom());
 
         // Afficher la bio ou un texte par défaut
         if (client.getDescription() != null && !client.getDescription().isEmpty()) {
@@ -95,37 +112,36 @@ public class ProfileActivity extends AppCompatActivity {
         } else {
             userBioTextView.setText("Aucune bio");
             userBioTextView.setVisibility(View.VISIBLE);
-        }
+        }*/
 
         // Afficher l'image de profil
-        if (client.getProfileImageUrl() != null && !client.getProfileImageUrl().isEmpty()) {
+        /*if (client.getProfileImageUrl() != null && !client.getProfileImageUrl().isEmpty()) {
             Picasso.get().load(client.getProfileImageUrl()).placeholder(R.drawable.userpfp).error(R.drawable.userpfp).into(profileImageView);
         } else {
             profileImageView.setImageResource(R.drawable.userpfp);
-        }
+        }*/
+        profileImageView.setImageResource(R.drawable.userpfp);
     }
 
     private void setupRecyclerView() {
+
         userRecipeAdapter = new RecetteAdapter(new ArrayList<>(), recette -> {
             Intent intent = new Intent(ProfileActivity.this, RecipeDetailPageActivity.class);
             intent.putExtra("ID", recette.getId());
             startActivity(intent);
         });
+
+        //Modifier les données des recettes selon les recettes récupéré
+        recetteViewModel.getListeRecetteAbrege().observe(this, recetteAbreges -> {
+            userRecipeAdapter.setData(Arrays.asList(recetteAbreges));
+        });
+        recetteViewModel.setListeRecetteAbrege("tout", "miennes");
+
         userRecipesRecyclerView.setAdapter(userRecipeAdapter);
         userRecipesRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         userRecipesRecyclerView.setNestedScrollingEnabled(false);
     }
 
-    // Charge les recettes créées par l'utilisateur (SIMULATION)    Not real temporary for now
-    private void loadUserRecipes() {
-        // TODO: Remplacer par un appel réel pour récupérer les recettes du user 'ClientActuel.getClientConnecter().getNom_utilisateur()'
-        Log.w("ProfileActivity", "Chargement SIMULÉ des recettes user via la liste statique sauvegardée.");
-        userRecipeAdapter.setData(new ArrayList<>(MaListeRecettesActivity.savedRecipesList));
-        if (MaListeRecettesActivity.savedRecipesList.isEmpty()) {
-            // Optionnel: Afficher un message si vide
-            Toast.makeText(this,"Aucune recette créée (simulation)", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     private void setupBottomNavigationListener() {
         bottomNavigationView.setOnItemSelectedListener(item -> {
