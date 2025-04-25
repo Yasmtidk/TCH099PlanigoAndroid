@@ -39,7 +39,7 @@ public class AccueilActivity extends AppCompatActivity {
         navigationItems = new ArrayList<>();
         navigationItems.add(new AccueilNavigationItem("Découvrir Recettes", R.drawable.recipe_book, RechercheRecetteActivity.class));
         navigationItems.add(new AccueilNavigationItem("Mes Recettes", R.drawable.myyyy_recipe, MaListeRecettesActivity.class));
-        navigationItems.add(new AccueilNavigationItem("Planificateur", R.drawable.weekplanner, WeeklyPlannerActivity.class));
+        navigationItems.add(new AccueilNavigationItem("Planificateur", R.drawable.weekplanner, ListePlanificateurActivity.class));
         navigationItems.add(new AccueilNavigationItem("Mon Stock", R.drawable.mon_stock, MonStockIngredientsActivity.class));
         navigationItems.add(new AccueilNavigationItem("Mon Profil", R.drawable.usernavigation, ProfileActivity.class));
     }

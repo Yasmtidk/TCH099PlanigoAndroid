@@ -118,20 +118,19 @@ public class StockageRepository {
      * Récupère tous les produits de la liste d'épicerie.
      * En cas de succès: listeProduit est modifiée par la liste des produits récupérés (ATTENTION: utilise le même LiveData que le stock pour l'instant).
      * En cas d'échec: resultatErreurAPILiveData est modifié par un string correspondant au message d'erreur.
-     * TODO: Vérifier l'endpoint API et la clé JSON. Séparer le LiveData si nécessaire.
      */
-    public void chargerListeEpicerie() {
+    public void chargerListeEpicerie(int idPlan) {
         (new Thread() {
             public void run() {
                 try {
                     JSONObject postObj = new JSONObject();
-                    postObj.put("identifiant", ClientActuel.getClientConnecter().getNom_utilisateur());
-                    postObj.put("motDePasse", ClientActuel.getClientConnecter().getMot_de_passe());
+                    postObj.put("username", ClientActuel.getClientConnecter().getNom_utilisateur());
+                    postObj.put("plan", idPlan);
                     RequestBody corpsPostRequete = RequestBody.create(postObj.toString(), JSON);
 
                     // *** IMPORTANT: Ajuster l'URL de l'API pour la liste d'épicerie ***
                     Request postRequete = new Request.Builder()
-                            .url(URL_POINT_ENTREE + "epicerie.php/recuperer-epicerie/") // TODO: Mettre le bon endpoint
+                            .url(URL_POINT_ENTREE + "getListeEpicerie.php/liste")
                             .post(corpsPostRequete)
                             .build();
                     Response response = okHttpClient.newCall(postRequete).execute();
@@ -139,33 +138,28 @@ public class StockageRepository {
 
                     ResponseBody responseBody = response.body();
                     String stringResponce = responseBody.string();
-                    JSONObject jsonResponse = new JSONObject(stringResponce);
-                    String statutRequete = jsonResponse.getString("statut");
 
-                    if (statutRequete.equals("error")) {
-                        String messageRequete = jsonResponse.getString("message");
-                        resultatErreurAPILiveData.postValue(messageRequete);
-                    } else if (statutRequete.equals("success")) {
-                        // *** IMPORTANT: Ajuster la clé du tableau JSON pour la liste d'épicerie ***
-                        if (jsonResponse.has("liste_epicerie")) { // TODO: Mettre la bonne clé
-                            JSONArray epicerieArray = jsonResponse.getJSONArray("liste_epicerie");
-                            Produit[] listeEpicerieRequete = mapper.readValue(epicerieArray.toString(), Produit[].class);
-                            // Mettre à jour le LiveData (actuellement le même que le stock)
-                            listeProduitTravail = new LinkedList<>(Arrays.asList(listeEpicerieRequete));
-                            listeProduit.postValue(listeEpicerieRequete);
-                            resultatErreurAPILiveData.postValue(true); // Indiquer le succès si nécessaire
-                        } else {
-                            listeProduit.postValue(new Produit[0]);
-                            listeProduitTravail.clear();
-                            resultatErreurAPILiveData.postValue(true); // Succès mais liste vide
-                        }
+// Vérification du type de réponse
+                    if (stringResponce.trim().startsWith("[")) { // Vérifie si la réponse commence par un tableau JSON
+                        JSONArray jsonArrayResponse = new JSONArray(stringResponce);
+
+                        // Désérialiser directement le tableau en liste d'objets
+                        Produit[] listeEpicerieRequete = mapper.readValue(jsonArrayResponse.toString(), Produit[].class);
+                        listeProduit.postValue(listeEpicerieRequete);
                     } else {
-                        resultatErreurAPILiveData.postValue("Réponse inattendue du serveur.");
+                        JSONObject jsonResponse = new JSONObject(stringResponce);
+
+                        if (jsonResponse.has("error")) {
+                            String messageRequete = jsonResponse.getString("message");
+                            resultatErreurAPILiveData.postValue(messageRequete);
+                        } else {
+                            resultatErreurAPILiveData.postValue("Réponse inattendue de l'API.");
+                        }
                     }
 
                 } catch (JSONException | IOException e) {
                     resultatErreurAPILiveData.postValue("Erreur lors du chargement de la liste d'épicerie.");
-                    // e.printStackTrace();
+                    e.printStackTrace();
                 }
             }
         }).start();

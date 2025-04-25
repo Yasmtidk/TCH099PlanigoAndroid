@@ -27,12 +27,24 @@ public class MaListeEpicerieActivity extends AppCompatActivity {
     private StockageViewModel viewModel; // ViewModel pour les données
     private ItemIngredientAdapter adapter; // Adaptateur pour le RecyclerView
     private ImageView backButton; // Bouton retour optionnel
+    private int idPlanRepas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Assurez-vous que ce layout contient un RecyclerView avec l'ID @+id/groceryListView
         setContentView(R.layout.activity_ma_liste_epicerie);
+
+        // Récupérer l'ID de la recette passé via l'Intent, si inconnu on fini l'activity
+        int recipeId = getIntent().getIntExtra("ID", -1); // -1 comme valeur par défaut si non trouvé
+        if (recipeId != -1) {
+            idPlanRepas = recipeId;
+        } else {
+            // Gérer le cas où l'ID n'a pas été passé correctement
+            Toast.makeText(this, "Erreur: ID de plan repas!", Toast.LENGTH_SHORT).show();
+            finish(); // Fermer l'activité si l'ID est manquant
+            return;
+        }
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         // Utilisation du RecyclerView (assurez-vous que l'ID est correct dans le XML)
@@ -75,7 +87,7 @@ public class MaListeEpicerieActivity extends AppCompatActivity {
         });
 
         // Charger les données initiales de la liste d'épicerie
-        viewModel.chargerListeEpicerie(); // Appeler la méthode spécifique pour l'épicerie
+        viewModel.chargerListeEpicerie(idPlanRepas); // Appeler la méthode spécifique pour l'épicerie
 
         // Gérer la navigation via la barre inférieure
         bottomNavigationView.setOnItemSelectedListener(item -> {

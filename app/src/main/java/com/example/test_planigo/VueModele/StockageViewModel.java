@@ -59,10 +59,9 @@ public class StockageViewModel extends AndroidViewModel {
 
     /**
      * Charge la liste d'épicerie de l'utilisateur.
-     * TODO: Vérifier que le endpoint et la logique dans StockageRepository sont corrects.
      */
-    public void chargerListeEpicerie() {
-        stockageRepository.chargerListeEpicerie();
+    public void chargerListeEpicerie(int idPlan) {
+        stockageRepository.chargerListeEpicerie(idPlan);
     }
 
     /**
