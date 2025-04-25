@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray_background">
+
+    <LinearLayout
+        android:id="@+id/headerDetailPlanificateur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/principal_color"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp">
+
+        <ImageView
+            android:id="@+id/boutonRetourDetailPlanificateur"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/go_back"
+            android:contentDescription="@string/back"
+            app:tint="@color/white"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:id="@+id/titreDetailPlanificateurTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:gravity="start"
+            tools:text="Semaine du 15 Avril 2024"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end"/>
+
+        <ImageView
+            android:id="@+id/boutonEditerPlanificateur"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/pencil"
+            android:contentDescription="@string/edit_profile"
+            app:tint="@color/white"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/detailScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation"
+        android:layout_below="@id/headerDetailPlanificateur"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/contenuDetailLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView style="@style/DayTitleStyle" android:text="Lundi" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/lundiRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_recipe_card"
+                tools:itemCount="3"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView style="@style/DayTitleStyle" android:text="Mardi" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mardiRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_recipe_card"
+                tools:itemCount="3"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView style="@style/DayTitleStyle" android:text="Mercredi" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mercrediRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_recipe_card"
+                tools:itemCount="3"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView style="@style/DayTitleStyle" android:text="Jeudi" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/jeudiRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_recipe_card"
+                tools:itemCount="3"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView style="@style/DayTitleStyle" android:text="Vendredi" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/vendrediRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_recipe_card"
+                tools:itemCount="3"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView style="@style/DayTitleStyle" android:text="Samedi" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/samediRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_recipe_card"
+                tools:itemCount="3"
+                android:layout_marginBottom="16dp"/>
+
+            <TextView style="@style/DayTitleStyle" android:text="Dimanche" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dimancheRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="horizontal"
+                tools:listitem="@layout/item_recipe_card"
+                tools:itemCount="3"
+                android:layout_marginBottom="16dp"/>
+
+            <Button
+                android:id="@+id/boutonGenererListeEpicerie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/secondary_color"
+                android:paddingVertical="12dp"
+                android:text="@string/generer_liste_epicerie"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:cornerRadius="24dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/principal_color"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:menu="@menu/bottom_navigation_menu" />
+
+</RelativeLayout>

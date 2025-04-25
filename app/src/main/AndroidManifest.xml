@@ -50,6 +50,11 @@
         <activity android:name=".vue.activites.ConnectionActivity"
             android:exported="false"/>
 
+        <activity android:name=".vue.activites.ListePlanificateurActivity"
+            android:exported="false"/>
+        <activity android:name=".vue.activites.DetailPlanificateurActivity"
+            android:exported="false"/>
+
 
         <activity
             android:name=".vue.activites.MainActivity"

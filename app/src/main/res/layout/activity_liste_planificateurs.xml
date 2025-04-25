@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/light_gray_background">
 
     <LinearLayout
+        android:id="@+id/headerListePlanificateurs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -16,44 +18,46 @@
         android:background="@color/principal_color">
 
         <ImageView
-            android:id="@+id/backButtonGrocery"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/go_back"
-            android:contentDescription="@string/back"
+            android:src="@drawable/weekplanner"
+            android:contentDescription="@string/planificateur"
             app:tint="@color/white"
             android:layout_marginEnd="16dp"/>
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/grocery_cart"
-            android:contentDescription="@string/ma_liste_epicerie"
-            app:tint="@color/white" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/ma_liste_epicerie"
+            android:text="@string/mes_plans_de_semaine"
             android:textSize="20sp"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:gravity="start"
-            android:layout_marginStart="16dp"/>
+            android:gravity="start"/>
+
+        <ImageView
+            android:id="@+id/boutonAjouterPlanificateur"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/plus"
+            android:contentDescription="@string/ajouter_plan"
+            app:tint="@color/white"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"/>
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/groceryListView"
+        android:id="@+id/planificateursRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:padding="8dp"
         android:clipToPadding="false"
-        android:divider="@null"
-        android:dividerHeight="8dp"
-        android:padding="16dp"/>
-
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_planificateur_liste"
+        tools:itemCount="5"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

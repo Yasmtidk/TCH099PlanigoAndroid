@@ -2,11 +2,17 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="150dp"
     android:layout_height="wrap_content"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp"
-    app:cardUseCompatPadding="true">
+    app:cardBackgroundColor="@color/white"
+    app:cardUseCompatPadding="true"
+    android:layout_marginEnd="4dp"
+    android:layout_marginStart="4dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +26,7 @@
             android:layout_height="80dp"
             android:scaleType="centerCrop"
             tools:srcCompat="@drawable/planigologo"
-            android:contentDescription="Recipe Image"/>
+            android:contentDescription="@string/image_repas"/>
 
         <TextView
             android:id="@+id/recetteListeNom"

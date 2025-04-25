@@ -1,15 +1,17 @@
 package com.example.test_planigo.modeles.entitees;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Produit {
     @JsonProperty("nom")
     private String name;
 
-    @JsonAlias({"quantite_disponible", "quantite"})
+    @JsonAlias({"quantite_manquante", "quantite_disponible", "quantite"})
     private double quantity;
     @JsonProperty("unite_de_mesure")
     private String unit;

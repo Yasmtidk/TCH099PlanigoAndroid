@@ -104,4 +104,8 @@
         <item>Modéré</item>
         <item>Cher</item>
     </string-array>
+    <string name="mes_plans_de_semaine">Mes plans de semaine</string>
+    <string name="ajouter_plan">Ajouter un plan</string>
+    <string name="generer_liste_epicerie">Générer la liste d\'épicerie</string>
+    <string name="image_repas">Image du repas</string>
 </resources>
