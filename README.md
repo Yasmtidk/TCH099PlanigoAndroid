@@ -5,6 +5,8 @@ Accédez à une large sélection de recettes ou ajoutez les vôtres, puis créez
 PLANIGO calcule automatiquement votre liste de courses, en tenant compte des ingrédients nécessaires et de ceux que vous avez déjà, ce qui vous permet d'économiser du temps et de réduire le gaspillage.
 En résumé, PLANIGO est un outil pratique pour mieux gérer vos repas, gagner du temps et faire des économies. Simplifiez-vous la vie avec PLANIGO !
 
+https://github.com/user-attachments/assets/5487cd40-d05f-4f4a-8113-626cd06942cc
+
 ---
 
 ## Contributions
